@@ -1,8 +1,13 @@
 package com.scoutzknifez.weatherappv2.Utility;
 
+import androidx.fragment.app.FragmentTransaction;
+
 public class Constants {
     // Program wide variables
     public static boolean hasInternet = false;
+
+    // Android variables
+    public static FragmentTransaction fragmentTransaction;
 
     // Weather Fetching Constants
     public static final String WEB_SERVER = "https://api.darksky.net/forecast/";
