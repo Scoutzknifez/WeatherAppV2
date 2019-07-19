@@ -4,16 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.scoutzknifez.weatherappv2.Cards.Card;
-import com.scoutzknifez.weatherappv2.Cards.CardArrayAdapter;
+import com.scoutzknifez.weatherappv2.Cards.RecyclerCardArrayAdapter;
 import com.scoutzknifez.weatherappv2.DataFetcher.FetchedData;
-import com.scoutzknifez.weatherappv2.DataStructures.DayWeather;
 import com.scoutzknifez.weatherappv2.MainActivity;
 import com.scoutzknifez.weatherappv2.R;
 
@@ -28,17 +27,12 @@ public class WeatherForecast extends Fragment {
         View created = inflater.inflate(R.layout.weather_forecast, container, false);
 
         // Link the xml list view to the code
-        ListView listView = created.findViewById(R.id.card_listView);
-        CardArrayAdapter cardArrayAdapter = new CardArrayAdapter(MainActivity.selfRef.getApplicationContext(), R.layout.list_weather_card);
-
-        // Feed the card adapter a list to display
-        for(DayWeather dayWeather : FetchedData.dayWeathers) {
-            Card card = new Card("In long: " + dayWeather.getTime(), dayWeather.getIcon(), (int) dayWeather.getTemperature(), (int) dayWeather.getHighTemperature(), (int) dayWeather.getLowTemperature(), 0, 0, (int) dayWeather.getHumidity());
-            cardArrayAdapter.add(card);
-        }
+        RecyclerView recyclerView = created.findViewById(R.id.card_listView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.selfRef, LinearLayoutManager.HORIZONTAL, false));
+        RecyclerCardArrayAdapter recyclerCardArrayAdapter = new RecyclerCardArrayAdapter(FetchedData.dayWeathers);
 
         // Set the list view to use card array adapter data
-        listView.setAdapter(cardArrayAdapter);
+        recyclerView.setAdapter(recyclerCardArrayAdapter);
 
         return created;
     }
