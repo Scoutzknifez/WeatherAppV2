@@ -18,7 +18,6 @@ import java.util.List;
 public class CardArrayAdapter extends ArrayAdapter<Card> {
     private List<Card> cardList = new ArrayList<>();
 
-
     public CardArrayAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
