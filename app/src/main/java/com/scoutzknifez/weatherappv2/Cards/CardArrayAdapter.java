@@ -63,15 +63,12 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
             viewHolder.precipitationChance = row.findViewById(R.id.precipitationChanceLine);
             viewHolder.wind = row.findViewById(R.id.windLine);
             viewHolder.humidity = row.findViewById(R.id.humidityLine);
+
+            row.setTag(viewHolder);
         } else {
             viewHolder = (CardViewHolder) row.getTag();
         }
         Card card = getItem(position);
-
-        // This allows it to draw but does not draw the right stuff
-        // It crashes here because viewHolder == null sometimes.
-        /*if(card == null || viewHolder == null)
-            return row;*/
 
         String current = "" + card.getCurrentTemp();
         String high = "" + card.getHighTemp();
