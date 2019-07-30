@@ -14,7 +14,7 @@ public abstract class WeatherParent {
     private double precipitationProbability;
     private double humidity;
     private int windSpeed;
-    private int windBearing;
+    private double windBearing;
 
     @Override
     public String toString() {
