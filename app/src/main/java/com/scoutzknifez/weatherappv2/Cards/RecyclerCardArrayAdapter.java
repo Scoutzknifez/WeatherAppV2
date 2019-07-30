@@ -1,5 +1,6 @@
 package com.scoutzknifez.weatherappv2.Cards;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.scoutzknifez.weatherappv2.DataFetcher.FetchedData;
 import com.scoutzknifez.weatherappv2.DataStructures.DayWeather;
+import com.scoutzknifez.weatherappv2.MainActivity;
 import com.scoutzknifez.weatherappv2.R;
+import com.scoutzknifez.weatherappv2.Utility.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,21 +39,26 @@ public class RecyclerCardArrayAdapter extends RecyclerView.Adapter<RecyclerCardA
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         Card card = getItem(position);
 
+        if(position > 0)
+            holder.currentTemp.setVisibility(View.INVISIBLE);
+
+        Resources resources = MainActivity.selfRef.getResources();
+        int imageID = resources.getIdentifier(Utils.getRealIconName(card.getIcon()), "drawable", MainActivity.selfRef.getPackageName());
         String current = "" + card.getCurrentTemp();
         String high = "" + card.getHighTemp();
         String low = "" + card.getLowTemp();
         String precip = card.getPrecipitationChance() + "%";
-        String wind = card.getWind() + " MPH";
-        String humid = card.getHumidity() + "%";
+        String wind = card.getWindSpeed() + " MPH " + Utils.getCardinalDirection(card.getWindBearing());
+        String humidity = card.getHumidity() + "%";
 
         holder.date.setText(card.getDate());
-        //hwHolder.icon.setImage
+        holder.icon.setImageResource(imageID);
         holder.currentTemp.setText(current);
         holder.highTemp.setText(high);
         holder.lowTemp.setText(low);
         holder.precipitationChance.setText(precip);
         holder.wind.setText(wind);
-        holder.humidity.setText(humid);
+        holder.humidity.setText(humidity);
     }
 
     @Override
@@ -62,7 +71,11 @@ public class RecyclerCardArrayAdapter extends RecyclerView.Adapter<RecyclerCardA
     }
 
     private void add(DayWeather dayWeather) {
-        Card card = new Card("In long: " + dayWeather.getTime(), dayWeather.getIcon(), (int) dayWeather.getTemperature(), (int) dayWeather.getHighTemperature(), (int) dayWeather.getLowTemperature(), 0, 0, (int) dayWeather.getHumidity());
+        Card card = new Card("Time: " + dayWeather.getTime(), dayWeather.getIcon(), (int) dayWeather.getTemperature(), (int) dayWeather.getHighTemperature(), (int) dayWeather.getLowTemperature(), (int) (dayWeather.getPrecipitationProbability() * 100), (int) dayWeather.getWindSpeed(), (double) dayWeather.getWindBearing(), (int) (dayWeather.getHumidity() * 100));
+        if(cardList.size() == 0) {
+            // Edit the first card which needs info from current weather
+            card.setCurrentTemp((int) FetchedData.currentWeather.getTemperature());
+        }
         cardList.add(card);
     }
 
@@ -80,7 +93,7 @@ public class RecyclerCardArrayAdapter extends RecyclerView.Adapter<RecyclerCardA
             super(view);
 
             this.date = view.findViewById(R.id.dateLine);
-            //this.icon = view.findViewById(R.id.iconImage);
+            this.icon = view.findViewById(R.id.iconImage);
             this.currentTemp = view.findViewById(R.id.currentTempLine);
             this.highTemp = view.findViewById(R.id.highTempLine);
             this.lowTemp = view.findViewById(R.id.lowTempLine);
