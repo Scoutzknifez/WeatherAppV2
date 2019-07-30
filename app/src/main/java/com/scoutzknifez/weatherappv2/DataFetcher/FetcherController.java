@@ -1,11 +1,14 @@
 package com.scoutzknifez.weatherappv2.DataFetcher;
 
+import android.util.Log;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scoutzknifez.weatherappv2.DataStructures.CurrentWeather;
 import com.scoutzknifez.weatherappv2.DataStructures.DayWeather;
 import com.scoutzknifez.weatherappv2.DataStructures.HourWeather;
 import com.scoutzknifez.weatherappv2.DataStructures.TimeAtMoment;
+import com.scoutzknifez.weatherappv2.DataStructures.WeatherParent;
 import com.scoutzknifez.weatherappv2.Utility.Constants;
 import com.scoutzknifez.weatherappv2.Utility.Utils;
 
@@ -50,13 +53,8 @@ public class FetcherController {
         getCurrentWeather(currentNode);
     }
 
-    private static void getCurrentWeather(JsonNode current) {
-        long time = System.currentTimeMillis() / 1000;
-        String summary = current.path("summary").asText();
-        String icon = current.path("icon").asText();
-        double temperature = current.path("temperature").asDouble();
-
-        FetchedData.currentWeather = new CurrentWeather(time, summary, icon, temperature);
+    private static void getCurrentWeather(JsonNode currentNode) {
+        FetchedData.currentWeather = getWeatherByNode(currentNode, CurrentWeather.class);
     }
 
     private static void doHourly(JsonNode root) {
@@ -66,22 +64,7 @@ public class FetcherController {
     }
 
     private static void getHourlyWeather(JsonNode hourlyNode) {
-        Iterator<JsonNode> hours = hourlyNode.elements();
-        ArrayList<HourWeather> hourWeathers = new ArrayList<>();
-
-        while (hours.hasNext()) {
-            JsonNode day = hours.next();
-
-            long time = day.path("time").asLong();
-            String summary = day.path("summary").asText();
-            String icon = day.path("icon").asText();
-            double temperature = day.path("temperature").asDouble();
-            double humidity = day.path("humidity").asDouble();
-
-            hourWeathers.add(new HourWeather(time, summary, icon, temperature, humidity));
-        }
-
-        FetchedData.hourWeathers = hourWeathers;
+        FetchedData.hourWeathers = (ArrayList<HourWeather>) makeWeatherForNode(hourlyNode, HourWeather.class);
     }
 
     private static void doDaily(JsonNode root) {
@@ -91,25 +74,7 @@ public class FetcherController {
     }
 
     private static void getDailyWeather(JsonNode dailyNode) {
-        Iterator<JsonNode> days = dailyNode.elements();
-        ArrayList<DayWeather> dayWeathers = new ArrayList<>();
-
-        while (days.hasNext()) {
-            JsonNode day = days.next();
-
-            long time = day.path("time").asLong();
-            String summary = day.path("summary").asText();
-            String icon = day.path("icon").asText();
-            double temperature = day.path("temperatureHigh").asDouble();
-            double humidity = day.path("humidity").asDouble();
-            int windSpeed = day.path("");
-            int windBearing = day.path("");
-            double precipitationChance = day.path("precipProbabilty").asDouble();
-
-            dayWeathers.add(new DayWeather(time, summary, icon, temperature, humidity));
-        }
-
-        FetchedData.dayWeathers = dayWeathers;
+        FetchedData.dayWeathers = (ArrayList<DayWeather>) makeWeatherForNode(dailyNode, DayWeather.class);
     }
 
     private static void delegateHours() {
@@ -129,6 +94,42 @@ public class FetcherController {
             int indexOfHour = hourTime.getHour();
             FetchedData.dayWeathers.get(dayIndex).getHourlyWeather()[indexOfHour] = FetchedData.hourWeathers.get(hourIndex);
             hourIndex++;
+        }
+    }
+
+    private static ArrayList<? extends WeatherParent> makeWeatherForNode(JsonNode weatherTypeNode, Class<? extends WeatherParent> clazz) {
+        Iterator<JsonNode> nodes = weatherTypeNode.elements();
+        ArrayList<WeatherParent> weatherParents = new ArrayList<>();
+
+        while(nodes.hasNext()) {
+            JsonNode node = nodes.next();
+            weatherParents.add(getWeatherByNode(node, clazz));
+        }
+
+        return weatherParents;
+    }
+
+    private static <T extends WeatherParent> T getWeatherByNode(JsonNode jsonNode, Class clazz) {
+        try {
+            WeatherParent weatherType = (WeatherParent) clazz.newInstance();
+
+            String tempKey = "temperature";
+            if(weatherType instanceof DayWeather)
+                tempKey = "temperatureHigh";
+
+            weatherType.setTime(jsonNode.path("time").asLong());
+            weatherType.setSummary(jsonNode.path("summary").asText());
+            weatherType.setIcon(jsonNode.path("icon").asText());
+            weatherType.setTemperature(jsonNode.path(tempKey).asDouble());
+            weatherType.setPrecipitationProbability(jsonNode.path("precipProbability").asDouble());
+            weatherType.setHumidity(jsonNode.path("humidity").asDouble());
+            weatherType.setWindSpeed(jsonNode.path("windSpeed").asInt());
+            weatherType.setWindBearing(jsonNode.path("windBearing").asInt());
+
+            return (T) weatherType;
+        } catch (Exception e) {
+            Log.e(Constants.TAG, "Could not parse Weather into type " + clazz.getName());
+            return null;
         }
     }
 }

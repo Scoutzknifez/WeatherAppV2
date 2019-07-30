@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Thread crashed");
         }
 
-        for(DayWeather dayWeather : FetchedData.dayWeathers)
-            System.out.println(dayWeather);
-
         Constants.fragmentTransaction = MainActivity.selfRef.getSupportFragmentManager().beginTransaction();
         Constants.fragmentTransaction.add(R.id.main_container, new WeatherForecast(), "fragment_weather_forecast");
         Constants.fragmentTransaction.commit();
