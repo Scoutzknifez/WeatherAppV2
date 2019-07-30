@@ -15,11 +15,8 @@ import java.net.URL;
 import static android.content.ContentValues.TAG;
 
 public class Utils {
-    public static long getMillisFromEpoch(long epoch) {
-        return epoch * Constants.MILLIS_IN_SECOND;
-    }
 
-    public static void initializeApplication() {
+    public static void initializeFetcher() {
         Constants.hasInternet = hasInternetConnection();
         if(Constants.hasInternet) {
             FetcherController.fetchWeather();
@@ -28,14 +25,46 @@ public class Utils {
         }
     }
 
+    public static double getRoundedInt(String string) {
+        return getRoundedInt(getDouble(string));
+    }
+
+    public static double getDouble(String string) {
+        try {
+            return Double.parseDouble(string);
+        } catch (Exception e) {
+            Log.e(Constants.TAG, "Can not parse String into double.");
+            return -1.0;
+        }
+    }
+
+    public static int getInt(String string) {
+        try {
+            return Integer.parseInt(string);
+        } catch (Exception e) {
+            Log.e(Constants.TAG, "Can not parse String into int.");
+            return -1;
+        }
+    }
+
+    public static int getRoundedInt(double input) {
+        return (int) Math.round(input);
+    }
+
+    public static long getMillisFromEpoch(long epoch) {
+        return epoch * Constants.MILLIS_IN_SECOND;
+    }
+
     public static boolean isEmptyJsonString(String string) {
         return (string == null || string.equalsIgnoreCase("") || string.equalsIgnoreCase("{}"));
     }
+
     private static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null;
     }
+
     public static boolean hasInternetConnection() {
         if (isNetworkAvailable(MainActivity.selfRef)) {
             try {

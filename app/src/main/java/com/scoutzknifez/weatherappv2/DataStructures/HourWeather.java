@@ -1,12 +1,12 @@
 package com.scoutzknifez.weatherappv2.DataStructures;
 
-public class HourWeather extends HumidWeather{
-    public HourWeather(long time, String summary, String icon, double temperature, double humidity) {
-        super(time, summary, icon, temperature, humidity);
+public class HourWeather extends WeatherParent {
+    public HourWeather(long time, String summary, String icon, double temperature, double precipitationProbability, double humidity, int windSpeed, int windBearing) {
+        super(time, summary, icon, temperature, precipitationProbability, humidity, windSpeed, windBearing);
     }
 
     @Override
     public String toString() {
-        return "Hour:{time:" + getTime() + ",summary:" + getSummary() + ",icon:" + getIcon() + ",temperature:" + getTemperature() + ",humidity:" + getHumidity() + "}";
+        return "Hour:" + super.toString();
     }
 }

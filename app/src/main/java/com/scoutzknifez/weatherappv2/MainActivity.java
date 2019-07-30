@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.scoutzknifez.weatherappv2.DataFetcher.FetchedData;
+import com.scoutzknifez.weatherappv2.DataStructures.DayWeather;
 import com.scoutzknifez.weatherappv2.Fragments.WeatherForecast;
 import com.scoutzknifez.weatherappv2.Utility.Constants;
 import com.scoutzknifez.weatherappv2.Utility.Utils;
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Utils.initializeApplication();
+                Utils.initializeFetcher();
             }
         });
         thread.start();
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             System.out.println("Thread crashed");
         }
+
+        for(DayWeather dayWeather : FetchedData.dayWeathers)
+            System.out.println(dayWeather);
 
         Constants.fragmentTransaction = MainActivity.selfRef.getSupportFragmentManager().beginTransaction();
         Constants.fragmentTransaction.add(R.id.main_container, new WeatherForecast(), "fragment_weather_forecast");

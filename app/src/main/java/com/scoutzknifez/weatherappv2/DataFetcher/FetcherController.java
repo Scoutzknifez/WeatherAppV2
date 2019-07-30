@@ -102,6 +102,9 @@ public class FetcherController {
             String icon = day.path("icon").asText();
             double temperature = day.path("temperatureHigh").asDouble();
             double humidity = day.path("humidity").asDouble();
+            int windSpeed = day.path("");
+            int windBearing = day.path("");
+            double precipitationChance = day.path("precipProbabilty").asDouble();
 
             dayWeathers.add(new DayWeather(time, summary, icon, temperature, humidity));
         }

@@ -3,11 +3,12 @@ package com.scoutzknifez.weatherappv2.DataStructures;
 import lombok.Getter;
 import lombok.Setter;
 
-public class DayWeather extends HumidWeather {
-    @Getter @Setter private HourWeather[] hourlyWeather = new HourWeather[24];
+@Getter @Setter
+public class DayWeather extends WeatherParent {
+    private HourWeather[] hourlyWeather = new HourWeather[24];
 
-    public DayWeather(long time, String summary, String icon, double temperature, double humidity) {
-        super(time, summary, icon, temperature, humidity);
+    public DayWeather(long time, String summary, String icon, double temperature, double precipitationProbability, double humidity, int windSpeed, int windBearing) {
+        super(time, summary, icon, temperature, precipitationProbability, humidity, windSpeed, windBearing);
     }
 
     public double getHighTemperature() {
@@ -28,7 +29,8 @@ public class DayWeather extends HumidWeather {
         return low;
     }
 
+    @Override
     public String toString() {
-        return "Day:{time:" + getTime() + ",summary:" + getSummary() + ",icon:" + getIcon() + ",temperature:" + getTemperature() + ",humidity:" + getHumidity() + "}";
+        return "Day:" + super.toString();
     }
 }
