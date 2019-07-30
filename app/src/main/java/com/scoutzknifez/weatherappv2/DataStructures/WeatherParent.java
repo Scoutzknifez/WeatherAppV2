@@ -2,9 +2,10 @@ package com.scoutzknifez.weatherappv2.DataStructures;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @AllArgsConstructor
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public abstract class WeatherParent {
     private long time;
     private String summary;
