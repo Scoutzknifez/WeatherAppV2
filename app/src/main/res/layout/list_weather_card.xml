@@ -29,7 +29,12 @@
         <ImageView
             android:id="@+id/iconImage"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxHeight="100dp"
+            android:maxWidth="100dp"
+            android:minHeight="100dp"
+            android:minWidth="100dp"
+            android:adjustViewBounds="true"/>
 
         <TextView
             android:id="@+id/currentTempLine"
