@@ -23,7 +23,6 @@ public class RecyclerCardArrayAdapter extends RecyclerView.Adapter<RecyclerCardA
     private List<Card> cardList = new ArrayList<>();
 
     public RecyclerCardArrayAdapter(ArrayList<DayWeather> dayWeathers) {
-        super();
         for(DayWeather dayWeather : dayWeathers)
             add(dayWeather);
     }
