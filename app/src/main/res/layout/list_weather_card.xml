@@ -1,87 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardParent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:background="@drawable/card_background_selector"
     android:descendantFocusability="beforeDescendants">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/dateLine"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingRight="15dp"
-        android:background="@drawable/card_background_selector"
-        android:descendantFocusability="afterDescendants">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Text line 1"
+        android:textSize="18sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/dateLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text line 1"
-            android:textSize="18dp"
-            android:textColor="#000000"/>
+    <ImageView
+        android:id="@+id/iconImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/dateLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"
+        android:minHeight="100dp"
+        android:minWidth="100dp"
+        android:adjustViewBounds="true"/>
 
-        <ImageView
-            android:id="@+id/iconImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxHeight="100dp"
-            android:maxWidth="100dp"
-            android:minHeight="100dp"
-            android:minWidth="100dp"
-            android:adjustViewBounds="true"/>
+    <TextView
+        android:id="@+id/currentTempLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/iconImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Text line 2"
+        android:textSize="18sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/currentTempLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text line 2"
-            android:textSize="18dp"
-            android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/highTempLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/currentTempLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/lowTempLine"
+        android:text="Text line 3"
+        android:textSize="18sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/highTempLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text line 3"
-            android:textSize="18dp"
-            android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/lowTempLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/currentTempLine"
+        app:layout_constraintLeft_toRightOf="@id/highTempLine"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Text line 4"
+        android:textSize="18sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/lowTempLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text line 3"
-            android:textSize="18dp"
-            android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/precipitationChanceLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lowTempLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Text line 5"
+        android:textSize="18sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/precipitationChanceLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text line 3"
-            android:textSize="18dp"
-            android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/windLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/precipitationChanceLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Text line 6"
+        android:textSize="18sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/windLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text line 3"
-            android:textSize="18dp"
-            android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/humidityLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/windLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Text line 7"
+        android:textSize="18sp"
+        android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/humidityLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text line 3"
-            android:textSize="18dp"
-            android:textColor="#000000"/>
-    </LinearLayout>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
