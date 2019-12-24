@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter @AllArgsConstructor
-public class Card {
+public class WeatherCard {
     private String date;
     private String icon;
     private int currentTemp;
@@ -22,7 +22,7 @@ public class Card {
     public String toString() {
         String returned = "";
 
-        returned += "<-----[Card]----->\n";
+        returned += "<-----[WeatherCard]----->\n";
         returned += "Date: " + getDate() + "\n";
         returned += "Icon: " + getIcon() + "\n";
         returned += "Current Temperature: " + getCurrentTemp() + "\n";
