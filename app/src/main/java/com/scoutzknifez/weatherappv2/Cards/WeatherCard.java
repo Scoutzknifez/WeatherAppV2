@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter @Setter @AllArgsConstructor
 public class WeatherCard {
-    private String date;
+    private long epox;
     private String icon;
     private int currentTemp;
     private int highTemp;
@@ -23,7 +23,7 @@ public class WeatherCard {
         String returned = "";
 
         returned += "<-----[WeatherCard]----->\n";
-        returned += "Date: " + getDate() + "\n";
+        returned += "Epox: " + getEpox() + "\n";
         returned += "Icon: " + getIcon() + "\n";
         returned += "Current Temperature: " + getCurrentTemp() + "\n";
         returned += "High Temperature: " + getHighTemp() + "\n";
