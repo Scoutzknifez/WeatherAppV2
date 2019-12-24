@@ -10,6 +10,7 @@ import com.scoutzknifez.weatherappv2.DataStructures.HourWeather;
 import com.scoutzknifez.weatherappv2.DataStructures.TimeAtMoment;
 import com.scoutzknifez.weatherappv2.DataStructures.WeatherParent;
 import com.scoutzknifez.weatherappv2.Utility.Constants;
+import com.scoutzknifez.weatherappv2.Utility.HiddenConstants;
 import com.scoutzknifez.weatherappv2.Utility.Utils;
 
 import java.io.BufferedReader;
@@ -22,7 +23,8 @@ import java.util.Iterator;
 public class FetcherController {
     private static String lat = "33.513833";
     private static String lon = "-117.103338";
-    private static String url = Constants.WEB_SERVER + Constants.API_KEY + "/" + lat + "," + lon + Constants.ADDITIONAL_ARGS;
+
+    private static String url = HiddenConstants.WEB_SERVER + HiddenConstants.API_KEY + "/" + lat + "," + lon + HiddenConstants.ADDITIONAL_ARGS;
 
     public static void fetchWeather() {
         try {

@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.scoutzknifez.weatherappv2.Cards.RecyclerCardArrayAdapter;
+import com.scoutzknifez.weatherappv2.Cards.HorizontalCardSpacer;
+import com.scoutzknifez.weatherappv2.Cards.WeatherCardAdapter;
 import com.scoutzknifez.weatherappv2.DataFetcher.FetchedData;
-import com.scoutzknifez.weatherappv2.MainActivity;
 import com.scoutzknifez.weatherappv2.R;
 
 public class WeatherForecast extends Fragment {
@@ -28,11 +28,12 @@ public class WeatherForecast extends Fragment {
 
         // Link the xml list view to the code
         RecyclerView recyclerView = created.findViewById(R.id.card_listView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.selfRef, LinearLayoutManager.HORIZONTAL, false));
-        RecyclerCardArrayAdapter recyclerCardArrayAdapter = new RecyclerCardArrayAdapter(FetchedData.dayWeathers);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.addItemDecoration(new HorizontalCardSpacer(10));
 
+        WeatherCardAdapter weatherCardAdapter = new WeatherCardAdapter(FetchedData.dayWeathers, getContext());
         // Set the list view to use card array adapter data
-        recyclerView.setAdapter(recyclerCardArrayAdapter);
+        recyclerView.setAdapter(weatherCardAdapter);
 
         return created;
     }
