@@ -1,15 +1,13 @@
 package com.scoutzknifez.weatherappv2.DataStructures;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@NoArgsConstructor
 @Getter @Setter
 public class DayWeather extends WeatherParent {
     private HourWeather[] hourlyWeather = new HourWeather[24];
-
-    public DayWeather() {
-        super();
-    }
 
     public DayWeather(long time, String summary, String icon, double temperature, double precipitationProbability, double humidity, int windSpeed, int windBearing) {
         super(time, summary, icon, temperature, precipitationProbability, humidity, windSpeed, windBearing);
