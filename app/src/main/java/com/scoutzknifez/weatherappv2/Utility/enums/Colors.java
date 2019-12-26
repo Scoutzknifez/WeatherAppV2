@@ -20,6 +20,7 @@ public enum Colors {
     // TODO Purples???
 
     BLACK(R.color.black),
+    LIGHT_GRAY(R.color.light_gray),
     GRAY(R.color.gray),
     WHITE(R.color.white);
 
