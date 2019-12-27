@@ -3,6 +3,7 @@ package com.scoutzknifez.weatherappv2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.scoutzknifez.weatherappv2.Fragments.WeatherForecast;
 import com.scoutzknifez.weatherappv2.Utility.Globals;
@@ -13,6 +14,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Change Android Properties for app
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         final MainActivity activity = this;
 
         // Check if the fetch was successful
