@@ -5,7 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class DayWeather extends WeatherParent {
     private HourWeather[] hourlyWeather = new HourWeather[24];
 
