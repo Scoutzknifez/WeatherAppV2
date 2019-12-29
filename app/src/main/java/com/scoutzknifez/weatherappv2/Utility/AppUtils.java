@@ -20,7 +20,7 @@ public class AppUtils {
 
     public static int getColorFromConditionHigh(DayWeather dayWeather, Context context) {
         if (dayWeather.getPrecipitationProbability() >= .75)
-            return getColor(Colors.DARK_BLUE, context);
+            return getColor(Colors.LIGHT_GRAY, context);
         else {
             if (dayWeather.getHighTemperature() >= 100)
                 return getColor(Colors.RED, context);

@@ -6,7 +6,6 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.scoutzknifez.weatherappv2.DataFetcher.FetcherController;
-import com.scoutzknifez.weatherappv2.MainActivity;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -15,10 +14,12 @@ import java.net.URL;
 import static android.content.ContentValues.TAG;
 
 public class Utils {
+    public static void initializeFetcher(Context context) {
+        FetcherController.fetchWeather();
+        if (true) return; // TODO Temp
 
-    public static void initializeFetcher() {
-        Constants.hasInternet = hasInternetConnection();
-        if(Constants.hasInternet) {
+        Globals.hasInternet = hasInternetConnection(context);
+        if(Globals.hasInternet) {
             FetcherController.fetchWeather();
         } else {
             System.out.println("No internet connection!");
@@ -122,8 +123,8 @@ public class Utils {
         return activeNetworkInfo != null;
     }
 
-    public static boolean hasInternetConnection() {
-        if (isNetworkAvailable(MainActivity.selfRef)) {
+    public static boolean hasInternetConnection(Context context) {
+        if (isNetworkAvailable(context)) {
             try {
                 HttpURLConnection urlc = (HttpURLConnection) (new URL("http://clients3.google.com/generate_204").openConnection());
                 urlc.setRequestProperty("User-Agent", "Android");

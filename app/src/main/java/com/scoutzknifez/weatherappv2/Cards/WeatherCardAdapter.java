@@ -21,6 +21,7 @@ import com.scoutzknifez.weatherappv2.Utility.AppUtils;
 import com.scoutzknifez.weatherappv2.Utility.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import lombok.Getter;
@@ -85,6 +86,8 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
     }
 
     private void add(DayWeather dayWeather) {
+        System.out.println(Arrays.toString(dayWeather.getHourlyWeather()));
+
         weatherDayList.add(dayWeather);
         WeatherCard weatherCard = new WeatherCard(dayWeather.getTime(), dayWeather.getIcon(), (int) dayWeather.getTemperature(), (int) dayWeather.getHighTemperature(), (int) dayWeather.getLowTemperature(), (int) (dayWeather.getPrecipitationProbability() * 100), (int) dayWeather.getWindSpeed(), (double) dayWeather.getWindBearing(), (int) (dayWeather.getHumidity() * 100));
         if(weatherCardList.size() == 0) {
