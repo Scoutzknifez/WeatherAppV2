@@ -6,6 +6,9 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * Horizontal spacer for in between cards in a recycler view
+ */
 public class HorizontalCardSpacer extends RecyclerView.ItemDecoration {
     private int spaceBetween;
 
