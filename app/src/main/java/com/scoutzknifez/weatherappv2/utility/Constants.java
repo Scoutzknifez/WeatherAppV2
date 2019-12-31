@@ -1,4 +1,4 @@
-package com.scoutzknifez.weatherappv2.Utility;
+package com.scoutzknifez.weatherappv2.utility;
 
 public class Constants {
     // Program wide variables

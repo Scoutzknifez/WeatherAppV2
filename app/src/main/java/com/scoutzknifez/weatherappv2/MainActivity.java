@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.scoutzknifez.weatherappv2.Fragments.WeatherForecast;
-import com.scoutzknifez.weatherappv2.Utility.Globals;
-import com.scoutzknifez.weatherappv2.Utility.Utils;
+import com.scoutzknifez.weatherappv2.utility.Globals;
+import com.scoutzknifez.weatherappv2.utility.Utils;
 
 public class MainActivity extends AppCompatActivity {
 

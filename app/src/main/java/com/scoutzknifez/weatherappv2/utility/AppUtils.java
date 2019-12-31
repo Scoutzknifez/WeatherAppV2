@@ -1,13 +1,13 @@
-package com.scoutzknifez.weatherappv2.Utility;
+package com.scoutzknifez.weatherappv2.utility;
 
 import android.content.Context;
 
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
-import com.scoutzknifez.weatherappv2.DataStructures.DayWeather;
+import com.scoutzknifez.weatherappv2.structures.DayWeather;
 import com.scoutzknifez.weatherappv2.MainActivity;
-import com.scoutzknifez.weatherappv2.Utility.enums.Colors;
+import com.scoutzknifez.weatherappv2.utility.enums.Colors;
 
 public class AppUtils {
     public static MainActivity getMainActivity(Fragment fragment) {

@@ -1,11 +1,11 @@
-package com.scoutzknifez.weatherappv2.Utility;
+package com.scoutzknifez.weatherappv2.utility;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.scoutzknifez.weatherappv2.DataFetcher.FetcherController;
+import com.scoutzknifez.weatherappv2.datafetcher.FetcherController;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

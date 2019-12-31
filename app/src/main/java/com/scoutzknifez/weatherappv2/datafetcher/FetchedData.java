@@ -1,8 +1,8 @@
-package com.scoutzknifez.weatherappv2.DataFetcher;
+package com.scoutzknifez.weatherappv2.datafetcher;
 
-import com.scoutzknifez.weatherappv2.DataStructures.CurrentWeather;
-import com.scoutzknifez.weatherappv2.DataStructures.DayWeather;
-import com.scoutzknifez.weatherappv2.DataStructures.HourWeather;
+import com.scoutzknifez.weatherappv2.structures.CurrentWeather;
+import com.scoutzknifez.weatherappv2.structures.DayWeather;
+import com.scoutzknifez.weatherappv2.structures.HourWeather;
 
 import java.util.ArrayList;
 

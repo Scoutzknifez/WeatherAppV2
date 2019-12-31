@@ -1,4 +1,4 @@
-package com.scoutzknifez.weatherappv2.Cards;
+package com.scoutzknifez.weatherappv2.cards;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -13,12 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.scoutzknifez.weatherappv2.DataFetcher.FetchedData;
-import com.scoutzknifez.weatherappv2.DataStructures.DayWeather;
-import com.scoutzknifez.weatherappv2.DataStructures.TimeAtMoment;
+import com.scoutzknifez.weatherappv2.datafetcher.FetchedData;
+import com.scoutzknifez.weatherappv2.structures.DayWeather;
+import com.scoutzknifez.weatherappv2.structures.TimeAtMoment;
 import com.scoutzknifez.weatherappv2.R;
-import com.scoutzknifez.weatherappv2.Utility.AppUtils;
-import com.scoutzknifez.weatherappv2.Utility.Utils;
+import com.scoutzknifez.weatherappv2.utility.AppUtils;
+import com.scoutzknifez.weatherappv2.utility.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

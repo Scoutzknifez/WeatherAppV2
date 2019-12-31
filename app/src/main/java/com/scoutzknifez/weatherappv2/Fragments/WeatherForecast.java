@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.scoutzknifez.weatherappv2.Cards.HorizontalCardSpacer;
-import com.scoutzknifez.weatherappv2.Cards.WeatherCardAdapter;
-import com.scoutzknifez.weatherappv2.DataFetcher.FetchedData;
+import com.scoutzknifez.weatherappv2.cards.HorizontalCardSpacer;
+import com.scoutzknifez.weatherappv2.cards.WeatherCardAdapter;
+import com.scoutzknifez.weatherappv2.datafetcher.FetchedData;
 import com.scoutzknifez.weatherappv2.R;
 
 public class WeatherForecast extends Fragment {

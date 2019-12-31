@@ -1,6 +1,6 @@
-package com.scoutzknifez.weatherappv2.Cards;
+package com.scoutzknifez.weatherappv2.cards;
 
-import com.scoutzknifez.weatherappv2.Utility.Utils;
+import com.scoutzknifez.weatherappv2.utility.Utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

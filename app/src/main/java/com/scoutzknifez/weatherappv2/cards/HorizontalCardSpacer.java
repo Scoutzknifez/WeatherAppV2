@@ -1,4 +1,4 @@
-package com.scoutzknifez.weatherappv2.Cards;
+package com.scoutzknifez.weatherappv2.cards;
 
 import android.graphics.Rect;
 import android.view.View;

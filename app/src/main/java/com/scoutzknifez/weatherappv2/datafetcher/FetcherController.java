@@ -1,17 +1,17 @@
-package com.scoutzknifez.weatherappv2.DataFetcher;
+package com.scoutzknifez.weatherappv2.datafetcher;
 
 import android.util.Log;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scoutzknifez.weatherappv2.DataStructures.CurrentWeather;
-import com.scoutzknifez.weatherappv2.DataStructures.DayWeather;
-import com.scoutzknifez.weatherappv2.DataStructures.HourWeather;
-import com.scoutzknifez.weatherappv2.DataStructures.TimeAtMoment;
-import com.scoutzknifez.weatherappv2.DataStructures.WeatherParent;
-import com.scoutzknifez.weatherappv2.Utility.Constants;
-import com.scoutzknifez.weatherappv2.Utility.HiddenConstants;
-import com.scoutzknifez.weatherappv2.Utility.Utils;
+import com.scoutzknifez.weatherappv2.structures.CurrentWeather;
+import com.scoutzknifez.weatherappv2.structures.DayWeather;
+import com.scoutzknifez.weatherappv2.structures.HourWeather;
+import com.scoutzknifez.weatherappv2.structures.TimeAtMoment;
+import com.scoutzknifez.weatherappv2.structures.WeatherParent;
+import com.scoutzknifez.weatherappv2.utility.Constants;
+import com.scoutzknifez.weatherappv2.utility.HiddenConstants;
+import com.scoutzknifez.weatherappv2.utility.Utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

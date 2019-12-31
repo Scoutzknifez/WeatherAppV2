@@ -1,4 +1,4 @@
-package com.scoutzknifez.weatherappv2.Utility;
+package com.scoutzknifez.weatherappv2.utility;
 
 import androidx.fragment.app.FragmentTransaction;
 

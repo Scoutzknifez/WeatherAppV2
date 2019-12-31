@@ -1,4 +1,4 @@
-package com.scoutzknifez.weatherappv2.DataStructures;
+package com.scoutzknifez.weatherappv2.structures;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

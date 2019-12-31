@@ -1,4 +1,4 @@
-package com.scoutzknifez.weatherappv2.Utility.enums;
+package com.scoutzknifez.weatherappv2.utility.enums;
 
 import com.scoutzknifez.weatherappv2.R;
 
