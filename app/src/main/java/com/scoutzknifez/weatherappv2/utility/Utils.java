@@ -1,24 +1,16 @@
 package com.scoutzknifez.weatherappv2.utility;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.scoutzknifez.weatherappv2.datafetcher.FetcherController;
+import com.scoutzknifez.weatherappv2.structures.TimeAtMoment;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import static android.content.ContentValues.TAG;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 public class Utils {
-    public static void initializeFetcher(Context context) {
-        FetcherController.fetchWeather();
-        if (true) return; // TODO Temp
-
-        Globals.hasInternet = hasInternetConnection(context);
+    public static void initializeFetcher() {
+        Globals.hasInternet = hasInternetConnection();
         if(Globals.hasInternet) {
             FetcherController.fetchWeather();
         } else {
@@ -105,6 +97,20 @@ public class Utils {
         }
     }
 
+    /**
+     * Sends a message out to console with time stamp of log execution
+     *
+     * NOTE: use %s to replace part of string with object
+     *
+     * @param message   message to display with replaceable characters for objects
+     * @param objects   Objects to replace inside of the message string
+     */
+    public static void log(String message, Object... objects) {
+        TimeAtMoment timeAtMoment = new TimeAtMoment(System.currentTimeMillis());
+
+        System.out.println("[" + timeAtMoment + "] " + String.format(message, objects));
+    }
+
     public static int getRoundedInt(double input) {
         return (int) Math.round(input);
     }
@@ -117,27 +123,16 @@ public class Utils {
         return (string == null || string.equalsIgnoreCase("") || string.equalsIgnoreCase("{}"));
     }
 
-    private static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null;
-    }
-
-    public static boolean hasInternetConnection(Context context) {
-        if (isNetworkAvailable(context)) {
-            try {
-                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://clients3.google.com/generate_204").openConnection());
-                urlc.setRequestProperty("User-Agent", "Android");
-                urlc.setRequestProperty("Connection", "close");
-                urlc.setConnectTimeout(1500);
-                urlc.connect();
-                return (urlc.getResponseCode() == 204 && urlc.getContentLength() == 0);
-            } catch (IOException e) {
-                Log.e(TAG, "Error checking internet connection", e);
-            }
-        } else {
-            Log.d(TAG, "No network available!");
+    public static boolean hasInternetConnection() {
+        boolean status = false;
+        try (Socket socket = new Socket()) {
+            InetSocketAddress address = new InetSocketAddress("www.google.com", 80);
+            socket.connect(address, 1500);
+            if (socket.isConnected())
+                status = true;
+        } catch (Exception e) {
+            Utils.log("No internet connection available!");
         }
-        return false;
+        return status;
     }
 }

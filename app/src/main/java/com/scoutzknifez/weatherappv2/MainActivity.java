@@ -19,13 +19,11 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        final MainActivity activity = this;
-
         // Check if the fetch was successful
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Utils.initializeFetcher(activity.getApplicationContext());
+                Utils.initializeFetcher();
             }
         });
         thread.start();

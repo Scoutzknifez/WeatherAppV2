@@ -1,18 +1,20 @@
 package com.scoutzknifez.weatherappv2.structures;
 
+import androidx.annotation.NonNull;
+
+import java.util.Arrays;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class DayWeather extends WeatherParent {
     private HourWeather[] hourlyWeather = new HourWeather[24];
-
-    public DayWeather(long time, String summary, String icon, double temperature, double precipitationProbability, double humidity, int windSpeed, int windBearing) {
-        super(time, summary, icon, temperature, precipitationProbability, humidity, windSpeed, windBearing);
-    }
 
     public double getHighTemperature() {
         double high = getTemperature();
@@ -32,8 +34,13 @@ public class DayWeather extends WeatherParent {
         return low;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "Day:" + super.toString();
+        double[] temps = new double[24];
+        for (int i = 0; i < temps.length; i++)
+            temps[i] = (getHourlyWeather()[i] != null ? getHourlyWeather()[i].getTemperature() : 0);
+
+        return "Day:{time:" + getTime() + ",summary:" + getSummary() + ",icon:" + getIcon() + ",temperature:" + getTemperature() + ",humidity:" + getHumidity() + ",high:" + getHighTemperature() + ",low:" + getLowTemperature() + ",hourlyTemps:" + Arrays.toString(temps) + "}";
     }
 }

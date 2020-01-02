@@ -1,7 +1,5 @@
 package com.scoutzknifez.weatherappv2.datafetcher;
 
-import android.util.Log;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scoutzknifez.weatherappv2.structures.CurrentWeather;
@@ -9,7 +7,6 @@ import com.scoutzknifez.weatherappv2.structures.DayWeather;
 import com.scoutzknifez.weatherappv2.structures.HourWeather;
 import com.scoutzknifez.weatherappv2.structures.TimeAtMoment;
 import com.scoutzknifez.weatherappv2.structures.WeatherParent;
-import com.scoutzknifez.weatherappv2.utility.Constants;
 import com.scoutzknifez.weatherappv2.utility.HiddenConstants;
 import com.scoutzknifez.weatherappv2.utility.Utils;
 
@@ -65,6 +62,7 @@ public class FetcherController {
         getHourlyWeather(hourlyDataNode);
     }
 
+    @SuppressWarnings("unchecked")
     private static void getHourlyWeather(JsonNode hourlyNode) {
         FetchedData.hourWeathers = (ArrayList<HourWeather>) makeWeatherForNode(hourlyNode, HourWeather.class);
     }
@@ -75,6 +73,7 @@ public class FetcherController {
         getDailyWeather(dailyDataNode);
     }
 
+    @SuppressWarnings("unchecked")
     private static void getDailyWeather(JsonNode dailyNode) {
         FetchedData.dayWeathers = (ArrayList<DayWeather>) makeWeatherForNode(dailyNode, DayWeather.class);
     }
@@ -85,9 +84,8 @@ public class FetcherController {
 
         // Check to ensure that the indexes are contained in the lists of fetched data.
         while((dayIndex < FetchedData.dayWeathers.size()) && (hourIndex < FetchedData.hourWeathers.size())) {
-
-            TimeAtMoment hourTime = new TimeAtMoment(FetchedData.hourWeathers.get(hourIndex).getTime());
-            TimeAtMoment dayStartTime = new TimeAtMoment( FetchedData.dayWeathers.get(dayIndex).getTime());
+            TimeAtMoment hourTime = new TimeAtMoment(Utils.getMillisFromEpoch(FetchedData.hourWeathers.get(hourIndex).getTime()));
+            TimeAtMoment dayStartTime = new TimeAtMoment(Utils.getMillisFromEpoch(FetchedData.dayWeathers.get(dayIndex).getTime()));
 
             // First index of hour will ALWAYS be the same day you are in at index 0
             if(!hourTime.isSameDay(dayStartTime))
@@ -111,18 +109,16 @@ public class FetcherController {
         return weatherParents;
     }
 
-    private static <T extends WeatherParent> T getWeatherByNode(JsonNode jsonNode, Class clazz) {
+    @SuppressWarnings("unchecked")
+    private static <T extends WeatherParent> T getWeatherByNode(JsonNode jsonNode, Class<? extends WeatherParent> clazz) {
         try {
-            WeatherParent weatherType = (WeatherParent) clazz.newInstance();
-
-            String tempKey = "temperature";
-            if(weatherType instanceof DayWeather)
-                tempKey = "temperatureHigh";
+            WeatherParent weatherType = clazz.newInstance();
 
             weatherType.setTime(jsonNode.path("time").asLong());
             weatherType.setSummary(jsonNode.path("summary").asText());
             weatherType.setIcon(jsonNode.path("icon").asText());
-            weatherType.setTemperature(jsonNode.path(tempKey).asDouble());
+            weatherType.setTemperature(jsonNode.path(
+                    weatherType instanceof DayWeather ? "temperatureHigh" : "temperature").asDouble());
             weatherType.setPrecipitationProbability(jsonNode.path("precipProbability").asDouble());
             weatherType.setHumidity(jsonNode.path("humidity").asDouble());
             weatherType.setWindSpeed(jsonNode.path("windSpeed").asInt());
@@ -130,7 +126,7 @@ public class FetcherController {
 
             return (T) weatherType;
         } catch (Exception e) {
-            Log.e(Constants.TAG, "Could not parse Weather into type " + clazz.getName());
+            Utils.log("Could not parse Weather into type %s", clazz.getName());
             return null;
         }
     }
