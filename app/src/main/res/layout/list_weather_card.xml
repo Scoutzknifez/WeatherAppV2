@@ -16,12 +16,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Text line 1"
+        android:text="@string/little_dummy"
         android:textSize="18sp"
         android:textColor="#000000"/>
 
     <ImageView
         android:id="@+id/iconImage"
+        android:contentDescription="@string/dummy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/dateLine"
@@ -40,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/iconImage"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Text line 2"
+        android:text="@string/little_dummy"
         android:textSize="18sp"
         android:textColor="#000000"/>
 
@@ -51,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@id/currentTempLine"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/lowTempLine"
-        android:text="Text line 3"
+        android:text="@string/little_dummy"
         android:textSize="18sp"
         android:textColor="#000000"/>
 
@@ -62,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@id/currentTempLine"
         app:layout_constraintLeft_toRightOf="@id/highTempLine"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Text line 4"
+        android:text="@string/little_dummy"
         android:textSize="18sp"
         android:textColor="#000000"/>
 
@@ -73,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/lowTempLine"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Text line 5"
+        android:text="@string/little_dummy"
         android:textSize="18sp"
         android:textColor="#000000"/>
 
@@ -84,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@id/precipitationChanceLine"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Text line 6"
+        android:text="@string/little_dummy"
         android:textSize="18sp"
         android:textColor="#000000"/>
 
@@ -95,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@id/windLine"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Text line 7"
+        android:text="@string/little_dummy"
         android:textSize="18sp"
         android:textColor="#000000"/>
 

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.scoutzknifez.weatherappv2.cards.HorizontalCardSpacer;
+import com.scoutzknifez.weatherappv2.cards.spacers.HorizontalCardSpacer;
 import com.scoutzknifez.weatherappv2.cards.WeatherCardAdapter;
 import com.scoutzknifez.weatherappv2.datafetcher.FetchedData;
 import com.scoutzknifez.weatherappv2.R;
