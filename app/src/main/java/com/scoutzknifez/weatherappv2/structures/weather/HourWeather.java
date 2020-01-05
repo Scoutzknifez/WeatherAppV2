@@ -1,4 +1,4 @@
-package com.scoutzknifez.weatherappv2.structures;
+package com.scoutzknifez.weatherappv2.structures.weather;
 
 import androidx.annotation.NonNull;
 import lombok.AllArgsConstructor;
