@@ -36,22 +36,10 @@
         android:adjustViewBounds="true"/>
 
     <TextView
-        android:id="@+id/currentTempLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/iconImage"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/little_dummy"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:textColor="#000000"/>
-
-    <TextView
         android:id="@+id/highTempLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/currentTempLine"
+        app:layout_constraintTop_toBottomOf="@id/iconImage"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/lowTempLine"
         android:text="@string/little_dummy"
@@ -63,7 +51,7 @@
         android:id="@+id/lowTempLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/currentTempLine"
+        app:layout_constraintTop_toBottomOf="@id/iconImage"
         app:layout_constraintLeft_toRightOf="@id/highTempLine"
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/little_dummy"

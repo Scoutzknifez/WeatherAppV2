@@ -1,7 +1,6 @@
 package com.scoutzknifez.weatherappv2.cards;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.scoutzknifez.weatherappv2.datafetcher.FetchedData;
-import com.scoutzknifez.weatherappv2.structures.DayWeather;
+import com.scoutzknifez.weatherappv2.structures.weather.DayWeather;
 import com.scoutzknifez.weatherappv2.structures.TimeAtMoment;
 import com.scoutzknifez.weatherappv2.R;
 import com.scoutzknifez.weatherappv2.utility.AppUtils;
 import com.scoutzknifez.weatherappv2.utility.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import lombok.Getter;
@@ -36,8 +33,8 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
 
     public WeatherCardAdapter(ArrayList<DayWeather> dayWeathers, Context context) {
         setContext(context);
-        for(DayWeather dayWeather : dayWeathers)
-            add(dayWeather);
+        for (int i = 1; i < dayWeathers.size(); i++)
+            add(dayWeathers.get(i));
     }
 
     @NonNull
@@ -51,15 +48,9 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         WeatherCard weatherCard = getItem(position);
 
-        if(position > 0)
-            holder.currentTemp.setVisibility(View.INVISIBLE);
-
         holder.container.getBackground().setColorFilter(AppUtils.getColorFromConditionHigh(weatherDayList.get(position), getContext()), PorterDuff.Mode.SRC_ATOP);
 
-        Resources resources = getContext().getResources();
-        int imageID = resources.getIdentifier(Utils.getRealIconName(weatherCard.getIcon()), "drawable", getContext().getPackageName());
         String date = new TimeAtMoment(weatherCard.getEpox() * 1000).getDateFormat();
-        String current = "" + weatherCard.getCurrentTemp();
         String high = "" + weatherCard.getHighTemp();
         String low = "" + weatherCard.getLowTemp();
         String precip = weatherCard.getPrecipitationChance() + "%";
@@ -67,8 +58,7 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
         String humidity = weatherCard.getHumidity() + "%";
 
         holder.date.setText(date);
-        holder.icon.setImageResource(imageID);
-        holder.currentTemp.setText(current);
+        holder.icon.setImageResource(AppUtils.getWeatherIcon(weatherCard.getIcon(), getContext()));
         holder.highTemp.setText(high);
         holder.lowTemp.setText(low);
         holder.precipitationChance.setText(precip);
@@ -86,14 +76,8 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
     }
 
     private void add(DayWeather dayWeather) {
-        System.out.println(Arrays.toString(dayWeather.getHourlyWeather()));
-
         weatherDayList.add(dayWeather);
-        WeatherCard weatherCard = new WeatherCard(dayWeather.getTime(), dayWeather.getIcon(), (int) dayWeather.getTemperature(), (int) dayWeather.getHighTemperature(), (int) dayWeather.getLowTemperature(), (int) (dayWeather.getPrecipitationProbability() * 100), (int) dayWeather.getWindSpeed(), (double) dayWeather.getWindBearing(), (int) (dayWeather.getHumidity() * 100));
-        if(weatherCardList.size() == 0) {
-            // Edit the first weatherCard which needs info from current weather
-            weatherCard.setCurrentTemp((int) FetchedData.currentWeather.getTemperature());
-        }
+        WeatherCard weatherCard = new WeatherCard(dayWeather.getTime(), dayWeather.getIcon(), (int) dayWeather.getTemperature(), (int) dayWeather.getHighTemperature(), (int) dayWeather.getLowTemperature(), (int) (dayWeather.getPrecipitationProbability() * 100), dayWeather.getWindSpeed(), dayWeather.getWindBearing(), (int) (dayWeather.getHumidity() * 100));
         weatherCardList.add(weatherCard);
     }
 
@@ -101,7 +85,6 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
         ConstraintLayout container;
         TextView date;
         ImageView icon;
-        TextView currentTemp;
         TextView highTemp;
         TextView lowTemp;
         TextView precipitationChance;
@@ -114,7 +97,6 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
             this.container = view.findViewById(R.id.cardParent);
             this.date = view.findViewById(R.id.dateLine);
             this.icon = view.findViewById(R.id.iconImage);
-            this.currentTemp = view.findViewById(R.id.currentTempLine);
             this.highTemp = view.findViewById(R.id.highTempLine);
             this.lowTemp = view.findViewById(R.id.lowTempLine);
             this.precipitationChance = view.findViewById(R.id.precipitationChanceLine);
