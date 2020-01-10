@@ -1,7 +1,6 @@
 package com.scoutzknifez.weatherappv2.cards;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,10 +44,10 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CardViewHolder holder, final int position) {
         WeatherCard weatherCard = getItem(position);
 
-        holder.container.getBackground().setColorFilter(AppUtils.getColorFromConditionHigh(weatherDayList.get(position), getContext()), PorterDuff.Mode.SRC_ATOP);
+        // holder.container.getBackground().setColorFilter(AppUtils.getColorFromConditionHigh(weatherDayList.get(position), getContext()), PorterDuff.Mode.SRC_ATOP);
 
         String date = new TimeAtMoment(weatherCard.getEpox() * 1000).getDateFormat();
         String high = "" + weatherCard.getHighTemp();
@@ -56,6 +55,16 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
         String precip = weatherCard.getPrecipitationChance() + "%";
         String wind = weatherCard.getWindSpeed() + " MPH " + Utils.getCardinalDirection(weatherCard.getWindBearing());
         String humidity = weatherCard.getHumidity() + "%";
+
+        // Open up a new fragment with that days more explicit information
+        holder.container.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println(weatherDayList.get(position));
+                }
+            }
+        );
 
         holder.date.setText(date);
         holder.icon.setImageResource(AppUtils.getWeatherIcon(weatherCard.getIcon(), getContext()));
