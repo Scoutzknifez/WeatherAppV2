@@ -10,4 +10,7 @@ public class Constants {
     public static final int MILLIS_IN_HOUR = MILLIS_IN_MINUTE * 60;
     public static final int MILLIS_IN_DAY = MILLIS_IN_HOUR * 24;
     public static final int EPOCH_DAY = MILLIS_IN_DAY / 1000;
+
+    // Fragment tags
+    public static final String WEATHER_FORECAST_TAG = "fragment_weather_forecast";
 }

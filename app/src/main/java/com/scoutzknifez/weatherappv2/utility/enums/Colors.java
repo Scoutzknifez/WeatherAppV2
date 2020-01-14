@@ -24,5 +24,5 @@ public enum Colors {
     GRAY(R.color.gray),
     WHITE(R.color.white);
 
-    int colorID;
+    private int colorID;
 }
