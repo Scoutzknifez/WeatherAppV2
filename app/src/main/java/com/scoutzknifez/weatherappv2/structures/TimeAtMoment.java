@@ -1,5 +1,7 @@
 package com.scoutzknifez.weatherappv2.structures;
 
+import com.scoutzknifez.weatherappv2.utility.Utils;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +45,7 @@ public class TimeAtMoment {
             minute = Integer.parseInt(splits[4]);
             second = Integer.parseInt(splits[5]);
         } catch (Exception e) {
-            System.out.println("Can not properly create TimeAtMoment object.");
+            Utils.log("Can not properly create TimeAtMoment object.");
         }
     }
 
@@ -55,8 +57,39 @@ public class TimeAtMoment {
 
     public String getDateFormat() {
         StringBuilder sb = new StringBuilder();
+        String date = getMonth() + "/" + getDay() + "/" + getYear();
 
-        sb.append(getMonth() + "/" + getDay() + "/" + getYear());
+        sb.append(date);
+
+        return sb.toString();
+    }
+
+    public String getHourMinuteFormat() {
+        StringBuilder sb = new StringBuilder();
+        String section;
+
+        if (getHour() == 0)
+            section = "12:";
+        else if(getHour() > 12) {
+            section = (getHour() - 12) + ":";
+        } else {
+            section = (getHour()) + ":";
+        }
+
+        sb.append(section);
+
+        if(getMinute() < 10) {
+            section = "0" + getMinute();
+        } else {
+            section = "" + getMinute();
+        }
+        sb.append(section);
+
+        if(getHour() > 12) {
+            sb.append(" PM");
+        } else {
+            sb.append(" AM");
+        }
 
         return sb.toString();
     }
@@ -64,12 +97,15 @@ public class TimeAtMoment {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        String section;
+        String section = getMonth() + "/" + getDay() + "/" + getYear() + " at ";
+        sb.append(section);
 
-        if(getHour() > 12) {
+        if (getHour() == 0)
+            section = "12:";
+        else if(getHour() > 12) {
             section = (getHour() - 12) + ":";
         } else {
-            section = (getHour()) + ":";
+            section = getHour() + ":";
         }
         sb.append(section);
 

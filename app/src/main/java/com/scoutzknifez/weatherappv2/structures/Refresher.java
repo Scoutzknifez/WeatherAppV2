@@ -16,22 +16,10 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Refresher {
-    private Supplier<WeatherDataPacket> weatherRefresher = new Supplier<WeatherDataPacket>() {
-        @Override
-        public WeatherDataPacket get() {
-            return FetcherController.fetchWeather();
-        }
-    };
+    private Supplier<WeatherDataPacket> weatherRefresher = FetcherController::fetchWeather;
 
     public Refresher() {
-        Thread thread = new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        queueRefresh();
-                    }
-                }
-        );
+        Thread thread = new Thread(this::queueRefresh);
 
         thread.start();
     }
