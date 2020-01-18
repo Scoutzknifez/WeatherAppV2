@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red">#FF0000</color>
-    <color name="light_red">#FF5500</color>
-    <color name="orange">#FF8800</color>
-    <color name="light_orange">#FFBB00</color>
-    <color name="yellow">#FFFF00</color>
-    <color name="green">#20A000</color>
-    <color name="light_blue">#00FFFF</color>
-    <color name="blue">#0080C0</color>
-    <color name="dark_blue">#0000FF</color>
-    <color name="purple">#9000C0</color>
+    <!-- Reds -->
+    <color name="dark_red">#660000</color>
+    <color name="red">#AA0000</color>
+    <color name="light_red">#FF0000</color>
 
+    <!-- Oranges -->
+    <color name="dark_orange">#CC5500</color>
+    <color name="orange">#FF5500</color>
+    <color name="light_orange">#FFA500</color>
+
+    <!-- Yellows -->
+    <color name="gold">#D4AF37</color>
+    <color name="dark_yellow">#FFBB00</color>
+    <color name="yellow">#FFFF00</color>
+
+    <!-- Greens -->
+    <color name="light_green">#20F000</color>
+    <color name="green">#209000</color>
+    <color name="dark_green">#205000</color>
+
+    <!-- Blues -->
+    <color name="light_blue">#00FFFF</color>
+    <color name="blue">#0050F0</color>
+    <color name="dark_blue">#0000FF</color>
+
+    <!-- Purples -->
+    <color name="pink">#F000F0</color>
+    <color name="purple">#9000B0</color>
+    <color name="dark_purple">#500090</color>
+
+    <!-- Gray scale -->
     <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
-    <color name="light_gray">#AAAAAA</color>
+    <color name="dark_gray">#444444</color>
     <color name="gray">#787878</color>
+    <color name="light_gray">#AAAAAA</color>
+    <color name="white">#FFFFFF</color>
+
 </resources>

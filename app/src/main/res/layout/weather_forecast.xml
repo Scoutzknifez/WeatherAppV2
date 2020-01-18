@@ -1,14 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/background_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/light_gray">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/list_divider"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/current_weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="200dp"
+            android:maxWidth="200dp"
+            android:minHeight="200dp"
+            android:minWidth="200dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/current_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Temperature: "
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="@id/current_weather_icon"
+            app:layout_constraintEnd_toEndOf="@id/current_weather_icon"
+            app:layout_constraintTop_toBottomOf="@id/current_weather_icon"/>
+
+        <TextView
+            android:id="@+id/current_high_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expected High: "
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/current_weather_icon"
+            app:layout_constraintEnd_toStartOf="@id/current_precipitation_chance"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/current_low_temp"/>
+
+        <TextView
+            android:id="@+id/current_low_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expected Low: "
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/current_weather_icon"
+            app:layout_constraintEnd_toStartOf="@id/current_humidity"
+            app:layout_constraintTop_toBottomOf="@id/current_high_temp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/current_precipitation_chance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precipitation Chance: "
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/current_high_temp"
+            app:layout_constraintEnd_toStartOf="@id/current_wind"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/current_humidity"/>
+
+        <TextView
+            android:id="@+id/current_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Humidity: "
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/current_low_temp"
+            app:layout_constraintEnd_toStartOf="@id/current_sunset_time"
+            app:layout_constraintTop_toBottomOf="@id/current_precipitation_chance"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/current_wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wind: "
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/current_precipitation_chance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/current_sunset_time"/>
+
+        <TextView
+            android:id="@+id/current_sunset_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sunset Time: "
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/current_humidity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/current_wind"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <!-- TODO Temp stuff to remove later, for testing -->
+
+        <TextView
+            android:id="@+id/refresh_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refresh Count Holder"
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/date_refreshed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date Line Holder"
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/refresh_count"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/list_divider"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        app:layout_constraintBottom_toTopOf="@id/card_listView"
+        android:background="@color/dark_gray"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/card_listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -16,6 +156,8 @@
         android:listSelector="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@null"
-        android:dividerHeight="10dp"/>
+        android:dividerHeight="10dp"
+        android:padding="10dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
