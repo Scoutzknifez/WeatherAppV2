@@ -57,13 +57,8 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
         String humidity = weatherCard.getHumidity() + "%";
 
         // Open up a new fragment with that days more explicit information
-        holder.container.setOnClickListener(
-            new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    System.out.println(weatherDayList.get(position));
-                }
-            }
+        holder.container.setOnClickListener(v ->
+                System.out.println(weatherDayList.get(position))
         );
 
         holder.date.setText(date);

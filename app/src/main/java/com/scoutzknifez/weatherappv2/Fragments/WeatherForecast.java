@@ -100,34 +100,29 @@ public class WeatherForecast extends Fragment implements Updatable {
         final DayWeather currentDay = Globals.recentWeatherData.peek().getDailyWeather().get(0);
         final TimeAtMoment timeAtMoment = new TimeAtMoment(Utils.getMillisFromEpoch(mostRecent.getTime()));
 
-        getActivity().runOnUiThread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        // TODO Temp for testing
-                        refreshTextCount.setText("Successful Update Count: " + DataConnector.updateCount);
-                        dateRefreshedText.setText(timeAtMoment.toString());
+        getActivity().runOnUiThread(() -> {
+            // TODO Temp for testing
+            refreshTextCount.setText("Successful Update Count: " + DataConnector.updateCount);
+            dateRefreshedText.setText(timeAtMoment.toString());
 
-                        // Background colors
-                        parentContainer.setBackgroundColor(AppUtils.getColorFromCurrent(mostRecent, getContext()));
-                        parentContainer.getBackground().setAlpha(200); // TODO Sets the background to a dimmer version of the original color
+            // Background colors
+            parentContainer.setBackgroundColor(AppUtils.getColorFromCurrent(mostRecent, getContext()));
+            parentContainer.getBackground().setAlpha(200); // TODO Sets the background to a dimmer version of the original color
 
-                        // Today weather information
-                        currentWeatherIcon.setImageResource(AppUtils.getWeatherIcon(mostRecent.getIcon(), getContext()));
-                        currentTempText.setText("Current Temp: " + mostRecent.getTemperature() + "°F");
-                        todayHighTempText.setText("Expected High: " + currentDay.getHighTemperature() + "°F");
-                        todayLowTempText.setText("Expected Low: " + currentDay.getLowTemperature() + "°F");
-                        todayPrecipitationChanceText.setText("Precipitation Chance: " + ((int) currentDay.getPrecipitationProbability() * 100) + "%");
-                        todayHumidityText.setText("Humidity: " + ((int) currentDay.getHumidity() * 100) + "%");
-                        todayWindText.setText("Wind: " + currentDay.getWindSpeed() + " MPH " + Utils.getCardinalDirection(currentDay.getWindBearing()));
-                        todaySunsetTimeText.setText("Sunset at " + (new TimeAtMoment(Utils.getMillisFromEpoch(currentDay.getSunsetTime()))).getHourMinuteFormat());
+            // Today weather information
+            currentWeatherIcon.setImageResource(AppUtils.getWeatherIcon(mostRecent.getIcon(), getContext()));
+            currentTempText.setText("Current Temp: " + mostRecent.getTemperature() + "°F");
+            todayHighTempText.setText("Expected High: " + currentDay.getHighTemperature() + "°F");
+            todayLowTempText.setText("Expected Low: " + currentDay.getLowTemperature() + "°F");
+            todayPrecipitationChanceText.setText("Precipitation Chance: " + ((int) currentDay.getPrecipitationProbability() * 100) + "%");
+            todayHumidityText.setText("Humidity: " + ((int) currentDay.getHumidity() * 100) + "%");
+            todayWindText.setText("Wind: " + currentDay.getWindSpeed() + " MPH " + Utils.getCardinalDirection(currentDay.getWindBearing()));
+            todaySunsetTimeText.setText("Sunset at " + (new TimeAtMoment(Utils.getMillisFromEpoch(currentDay.getSunsetTime()))).getHourMinuteFormat());
 
-                        // RecyclerView for cards
-                        WeatherCardAdapter weatherCardAdapter = new WeatherCardAdapter(Globals.recentWeatherData.peek().getDailyWeather(), getContext());
-                        // Set the list view to use card array adapter data
-                        getUpcomingWeatherCards().setAdapter(weatherCardAdapter);
-                    }
-                }
-        );
+            // RecyclerView for cards
+            WeatherCardAdapter weatherCardAdapter = new WeatherCardAdapter(Globals.recentWeatherData.peek().getDailyWeather(), getContext());
+            // Set the list view to use card array adapter data
+            getUpcomingWeatherCards().setAdapter(weatherCardAdapter);
+        });
     }
 }
