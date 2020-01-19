@@ -19,8 +19,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class FetcherController {
-    private static String lat = "33.513833";
-    private static String lon = "-117.103338";
+    // Temecula, CA
+    // private static String lat = "33.513833";
+    // private static String lon = "-117.103338";
+
+    // Pahrump, NV
+    private static String lat = "36.3087267";
+    private static String lon = "-116.0230096";
 
     private static String url = HiddenConstants.WEB_SERVER + HiddenConstants.API_KEY + "/" + lat + "," + lon + HiddenConstants.ADDITIONAL_ARGS;
 
@@ -135,6 +140,9 @@ public class FetcherController {
 
             if (weatherType instanceof DayWeather)
                 ((DayWeather) weatherType).setSunsetTime(jsonNode.path("sunsetTime").asLong());
+
+            if (weatherType instanceof CurrentWeather)
+                ((CurrentWeather) weatherType).setApparentTemperature(jsonNode.path("apparentTemperature").asDouble());
 
             return (T) weatherType;
         } catch (Exception e) {

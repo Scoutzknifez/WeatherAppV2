@@ -50,11 +50,11 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
         // holder.container.getBackground().setColorFilter(AppUtils.getColorFromConditionHigh(weatherDayList.get(position), getContext()), PorterDuff.Mode.SRC_ATOP);
 
         String date = new TimeAtMoment(weatherCard.getEpox() * 1000).getDateFormat();
-        String high = "" + weatherCard.getHighTemp();
-        String low = "" + weatherCard.getLowTemp();
-        String precip = weatherCard.getPrecipitationChance() + "%";
-        String wind = weatherCard.getWindSpeed() + " MPH " + Utils.getCardinalDirection(weatherCard.getWindBearing());
-        String humidity = weatherCard.getHumidity() + "%";
+        String high = "H: " + weatherCard.getHighTemp() + "°F";
+        String low = "L: " + weatherCard.getLowTemp() + "°F";
+        String precip = "Precipitation: " + weatherCard.getPrecipitationChance() + "%";
+        String wind = "Wind: " + weatherCard.getWindSpeed() + " MPH " + Utils.getCardinalDirection(weatherCard.getWindBearing());
+        String humidity = "Humidity: " + weatherCard.getHumidity() + "%";
 
         // Open up a new fragment with that days more explicit information
         holder.container.setOnClickListener(v ->

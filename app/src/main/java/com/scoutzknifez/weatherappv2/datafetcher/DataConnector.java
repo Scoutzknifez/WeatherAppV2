@@ -1,6 +1,6 @@
 package com.scoutzknifez.weatherappv2.datafetcher;
 
-import com.scoutzknifez.weatherappv2.Fragments.interfaces.Updatable;
+import com.scoutzknifez.weatherappv2.fragments.interfaces.Updatable;
 
 import java.util.ArrayList;
 import java.util.List;
