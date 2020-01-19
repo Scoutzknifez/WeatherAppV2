@@ -97,6 +97,10 @@ public class Utils {
         System.out.println("[" + timeAtMoment + "] " + String.format(message, objects));
     }
 
+    public static void log(Object object) {
+        log(object.toString());
+    }
+
     public static int getRoundedInt(double input) {
         return (int) Math.round(input);
     }

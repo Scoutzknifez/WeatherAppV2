@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.scoutzknifez.weatherappv2.Fragments.WeatherForecast;
+import com.scoutzknifez.weatherappv2.fragments.WeatherForecast;
 import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
 import com.scoutzknifez.weatherappv2.structures.Refresher;
 import com.scoutzknifez.weatherappv2.utility.Constants;

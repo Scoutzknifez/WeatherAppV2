@@ -2,7 +2,7 @@ package com.scoutzknifez.weatherappv2.utility;
 
 import androidx.fragment.app.FragmentTransaction;
 
-import com.scoutzknifez.weatherappv2.Fragments.WeatherForecast;
+import com.scoutzknifez.weatherappv2.fragments.WeatherForecast;
 import com.scoutzknifez.weatherappv2.structures.Queue;
 import com.scoutzknifez.weatherappv2.structures.Refresher;
 import com.scoutzknifez.weatherappv2.structures.weather.WeatherDataPacket;

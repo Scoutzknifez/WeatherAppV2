@@ -4,7 +4,7 @@ import androidx.core.util.Supplier;
 
 import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
 import com.scoutzknifez.weatherappv2.datafetcher.FetcherController;
-import com.scoutzknifez.weatherappv2.Fragments.interfaces.Updatable;
+import com.scoutzknifez.weatherappv2.fragments.interfaces.Updatable;
 import com.scoutzknifez.weatherappv2.structures.weather.WeatherDataPacket;
 import com.scoutzknifez.weatherappv2.utility.Constants;
 import com.scoutzknifez.weatherappv2.utility.Globals;
