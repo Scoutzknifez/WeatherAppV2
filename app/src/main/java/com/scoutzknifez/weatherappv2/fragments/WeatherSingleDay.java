@@ -1,4 +1,4 @@
-package com.scoutzknifez.weatherappv2.Fragments;
+package com.scoutzknifez.weatherappv2.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.scoutzknifez.weatherappv2.Fragments;
+package com.scoutzknifez.weatherappv2.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +18,7 @@ import com.scoutzknifez.weatherappv2.cards.spacers.HorizontalCardSpacer;
 import com.scoutzknifez.weatherappv2.cards.WeatherCardAdapter;
 import com.scoutzknifez.weatherappv2.R;
 import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
-import com.scoutzknifez.weatherappv2.Fragments.interfaces.Updatable;
+import com.scoutzknifez.weatherappv2.fragments.interfaces.Updatable;
 import com.scoutzknifez.weatherappv2.structures.TimeAtMoment;
 import com.scoutzknifez.weatherappv2.structures.weather.CurrentWeather;
 import com.scoutzknifez.weatherappv2.structures.weather.DayWeather;
@@ -38,6 +38,7 @@ public class WeatherForecast extends Fragment implements Updatable {
 
     private ImageView currentWeatherIcon;
     private TextView currentTempText;
+    private TextView currentApparentText;
     private TextView todayLowTempText;
     private TextView todayHighTempText;
     private TextView todayPrecipitationChanceText;
@@ -67,6 +68,7 @@ public class WeatherForecast extends Fragment implements Updatable {
         // Today weather information
         currentWeatherIcon = created.findViewById(R.id.current_weather_icon);
         currentTempText = created.findViewById(R.id.current_temp);
+        currentApparentText = created.findViewById(R.id.apparent_temp);
         todayLowTempText = created.findViewById(R.id.current_low_temp);
         todayHighTempText = created.findViewById(R.id.current_high_temp);
         todayPrecipitationChanceText = created.findViewById(R.id.current_precipitation_chance);
@@ -83,7 +85,7 @@ public class WeatherForecast extends Fragment implements Updatable {
                 )
         );
 
-        getUpcomingWeatherCards().addItemDecoration(new HorizontalCardSpacer(6));
+        getUpcomingWeatherCards().addItemDecoration(new HorizontalCardSpacer(4));
         update();
 
         return created;
@@ -107,13 +109,15 @@ public class WeatherForecast extends Fragment implements Updatable {
 
             // Background colors
             parentContainer.setBackgroundColor(AppUtils.getColorFromCurrent(mostRecent, getContext()));
-            parentContainer.getBackground().setAlpha(200); // TODO Sets the background to a dimmer version of the original color
+            // Sets the background to a dimmer version of the original color
+            parentContainer.getBackground().setAlpha(100);
 
             // Today weather information
             currentWeatherIcon.setImageResource(AppUtils.getWeatherIcon(mostRecent.getIcon(), getContext()));
-            currentTempText.setText("Current Temp: " + mostRecent.getTemperature() + "°F");
-            todayHighTempText.setText("Expected High: " + currentDay.getHighTemperature() + "°F");
-            todayLowTempText.setText("Expected Low: " + currentDay.getLowTemperature() + "°F");
+            currentTempText.setText("Current Temperature: " + Utils.getRoundedInt(mostRecent.getTemperature()) + "°F");
+            currentApparentText.setText("Feels like " + Utils.getRoundedInt(mostRecent.getApparentTemperature()) + "°F");
+            todayHighTempText.setText("Expected High: " + Utils.getRoundedInt(currentDay.getHighTemperature()) + "°F");
+            todayLowTempText.setText("Expected Low: " + Utils.getRoundedInt(currentDay.getLowTemperature()) + "°F");
             todayPrecipitationChanceText.setText("Precipitation Chance: " + ((int) currentDay.getPrecipitationProbability() * 100) + "%");
             todayHumidityText.setText("Humidity: " + ((int) currentDay.getHumidity() * 100) + "%");
             todayWindText.setText("Wind: " + currentDay.getWindSpeed() + " MPH " + Utils.getCardinalDirection(currentDay.getWindBearing()));
