@@ -20,12 +20,12 @@ import java.util.Iterator;
 
 public class FetcherController {
     // Temecula, CA
-    // private static String lat = "33.513833";
-    // private static String lon = "-117.103338";
+    private static String lat = "33.513833";
+    private static String lon = "-117.103338";
 
     // Pahrump, NV
-    private static String lat = "36.3087267";
-    private static String lon = "-116.0230096";
+    // private static String lat = "36.3087267";
+    // private static String lon = "-116.0230096";
 
     private static String url = HiddenConstants.WEB_SERVER + HiddenConstants.API_KEY + "/" + lat + "," + lon + HiddenConstants.ADDITIONAL_ARGS;
 
@@ -51,6 +51,8 @@ public class FetcherController {
             weatherPacket.setDailyWeather(doDaily(root));
 
             delegateHours(weatherPacket);
+
+
 
             return weatherPacket;
         } catch (Exception e) {

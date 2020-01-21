@@ -118,8 +118,8 @@ public class WeatherForecast extends Fragment implements Updatable {
             currentApparentText.setText("Feels like " + Utils.getRoundedInt(mostRecent.getApparentTemperature()) + "°F");
             todayHighTempText.setText("Expected High: " + Utils.getRoundedInt(currentDay.getHighTemperature()) + "°F");
             todayLowTempText.setText("Expected Low: " + Utils.getRoundedInt(currentDay.getLowTemperature()) + "°F");
-            todayPrecipitationChanceText.setText("Precipitation Chance: " + ((int) currentDay.getPrecipitationProbability() * 100) + "%");
-            todayHumidityText.setText("Humidity: " + ((int) currentDay.getHumidity() * 100) + "%");
+            todayPrecipitationChanceText.setText("Precipitation Chance: " + ((int) (currentDay.getPrecipitationProbability() * 100)) + "%");
+            todayHumidityText.setText("Humidity: " + ((int) (currentDay.getHumidity() * 100)) + "%");
             todayWindText.setText("Wind: " + currentDay.getWindSpeed() + " MPH " + Utils.getCardinalDirection(currentDay.getWindBearing()));
             todaySunsetTimeText.setText("Sunset at " + (new TimeAtMoment(Utils.getMillisFromEpoch(currentDay.getSunsetTime()))).getHourMinuteFormat());
 
