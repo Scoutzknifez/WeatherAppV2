@@ -98,7 +98,7 @@ public class Utils {
     }
 
     public static void log(Object object) {
-        log(object.toString());
+        log(object.toString(), null);
     }
 
     public static int getRoundedInt(double input) {
