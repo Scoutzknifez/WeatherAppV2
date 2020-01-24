@@ -8,8 +8,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class Utils {
-    public static String getRealIconName(String s)
-    {
+    public static String getRealIconName(String s) {
         StringBuilder sb = new StringBuilder(s);
 
         for(int i = 0; i < sb.length(); i++) {
@@ -24,8 +23,7 @@ public class Utils {
         return almostDone;
     }
 
-    public static String getCardinalDirection(double bearingInDegrees)
-    {
+    public static String getCardinalDirection(double bearingInDegrees) {
         if (bearingInDegrees >= 11.25 && bearingInDegrees < 33.75) {
             return "NNE";
         } else if (bearingInDegrees >= 33.75 && bearingInDegrees < 56.25) {
