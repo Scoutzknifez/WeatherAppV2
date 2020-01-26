@@ -20,8 +20,8 @@ import java.util.Iterator;
 
 public class FetcherController {
     // Temecula, CA
-    private static String lat = "33.513833";
-    private static String lon = "-117.103338";
+    public static String lat = "33.513833";
+    public static String lon = "-117.103338";
 
     // Pahrump, NV
     // private static String lat = "36.3087267";
