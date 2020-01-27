@@ -1,18 +1,19 @@
 package com.scoutzknifez.weatherappv2;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.scoutzknifez.weatherappv2.fragments.LocationWaiter;
 import com.scoutzknifez.weatherappv2.fragments.WeatherForecast;
 import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
+import com.scoutzknifez.weatherappv2.location.LocationActivity;
 import com.scoutzknifez.weatherappv2.structures.Refresher;
 import com.scoutzknifez.weatherappv2.utility.Constants;
 import com.scoutzknifez.weatherappv2.utility.Globals;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends LocationActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +26,20 @@ public class MainActivity extends AppCompatActivity {
         Globals.refresher = new Refresher();
         while (Globals.recentWeatherData.peek() == null) {}
 
-        Globals.mainForecastFragment = new WeatherForecast();
-        DataConnector.updatables.add(Globals.mainForecastFragment);
 
-        transitionToFragment(Globals.mainForecastFragment, Constants.WEATHER_FORECAST_TAG);
+        if (hasLocationPermissions()) {
+            initializeMainWeatherDisplay();
+            transitionToFragment(Globals.mainForecastFragment, Constants.WEATHER_FORECAST_TAG);
+        } else {
+            transitionToFragment(new LocationWaiter(), Constants.LOCATION_WAITER_TAG);
+        }
 
         setContentView(R.layout.activity_main);
+    }
+
+    public void initializeMainWeatherDisplay() {
+        Globals.mainForecastFragment = new WeatherForecast();
+        DataConnector.updatables.add(Globals.mainForecastFragment);
     }
 
     public void transitionToFragment(Fragment fragment, String tag) {
