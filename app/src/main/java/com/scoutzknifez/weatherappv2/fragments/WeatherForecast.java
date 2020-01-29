@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,58 +25,50 @@ import com.scoutzknifez.weatherappv2.utility.AppUtils;
 import com.scoutzknifez.weatherappv2.utility.Globals;
 import com.scoutzknifez.weatherappv2.utility.Utils;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import lombok.Getter;
 
 @Getter
 public class WeatherForecast extends Fragment implements Updatable {
-    private ConstraintLayout parentContainer;
+    @BindView(R.id.background_container)
+    ConstraintLayout parentContainer;
 
     // TODO Temp
-    private TextView refreshTextCount;
-    private TextView dateRefreshedText;
+    @BindView(R.id.refresh_count)
+    TextView refreshTextCount;
+    @BindView(R.id.date_refreshed)
+    TextView dateRefreshedText;
 
-    private ImageView currentWeatherIcon;
-    private TextView currentTempText;
-    private TextView currentApparentText;
-    private TextView todayLowTempText;
-    private TextView todayHighTempText;
-    private TextView todayPrecipitationChanceText;
-    private TextView todayHumidityText;
-    private TextView todayWindText;
-    private TextView todaySunsetTimeText;
+    // Today weather information
+    @BindView(R.id.current_weather_icon)
+    ImageView currentWeatherIcon;
+    @BindView(R.id.current_temp)
+    TextView currentTempText;
+    @BindView(R.id.apparent_temp)
+    TextView currentApparentText;
+    @BindView(R.id.current_low_temp)
+    TextView todayLowTempText;
+    @BindView(R.id.current_high_temp)
+    TextView todayHighTempText;
+    @BindView(R.id.current_precipitation_chance)
+    TextView todayPrecipitationChanceText;
+    @BindView(R.id.current_humidity)
+    TextView todayHumidityText;
+    @BindView(R.id.current_wind)
+    TextView todayWindText;
+    @BindView(R.id.current_sunset_time)
+    TextView todaySunsetTimeText;
 
-    private RecyclerView upcomingWeatherCards;
+    @BindView(R.id.card_listView)
+    RecyclerView upcomingWeatherCards;
 
-
-    public WeatherForecast() {
-
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View created = inflater.inflate(R.layout.weather_forecast, container, false);
-
-        // Link the xml list view to the code
-        parentContainer = created.findViewById(R.id.background_container);
-
-        // TODO Temp
-        refreshTextCount = created.findViewById(R.id.refresh_count);
-        dateRefreshedText = created.findViewById(R.id.date_refreshed);
-
-        // Today weather information
-        currentWeatherIcon = created.findViewById(R.id.current_weather_icon);
-        currentTempText = created.findViewById(R.id.current_temp);
-        currentApparentText = created.findViewById(R.id.apparent_temp);
-        todayLowTempText = created.findViewById(R.id.current_low_temp);
-        todayHighTempText = created.findViewById(R.id.current_high_temp);
-        todayPrecipitationChanceText = created.findViewById(R.id.current_precipitation_chance);
-        todayHumidityText = created.findViewById(R.id.current_humidity);
-        todayWindText = created.findViewById(R.id.current_wind);
-        todaySunsetTimeText = created.findViewById(R.id.current_sunset_time);
-
-        // Recycler view for upcoming days
-        upcomingWeatherCards = created.findViewById(R.id.card_listView);
+        View created = inflater.inflate(R.layout.fragment_weather_forecast, container, false);
+        ButterKnife.bind(this, created);
 
         getUpcomingWeatherCards().setLayoutManager(
                 new LinearLayoutManager(
@@ -89,11 +80,6 @@ public class WeatherForecast extends Fragment implements Updatable {
         update();
 
         return created;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
