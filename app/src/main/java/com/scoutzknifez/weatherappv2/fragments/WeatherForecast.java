@@ -67,8 +67,8 @@ public class WeatherForecast extends Fragment implements Updatable {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View created = inflater.inflate(R.layout.fragment_weather_forecast, container, false);
-        ButterKnife.bind(this, created);
+        View view = inflater.inflate(R.layout.fragment_weather_forecast, container, false);
+        ButterKnife.bind(this, view);
 
         getUpcomingWeatherCards().setLayoutManager(
                 new LinearLayoutManager(
@@ -79,7 +79,7 @@ public class WeatherForecast extends Fragment implements Updatable {
         getUpcomingWeatherCards().addItemDecoration(new HorizontalCardSpacer(4));
         update();
 
-        return created;
+        return view;
     }
 
     @Override

@@ -11,15 +11,17 @@ import androidx.fragment.app.Fragment;
 
 import com.scoutzknifez.weatherappv2.R;
 
-public class WeatherSingleDay extends Fragment {
-    public WeatherSingleDay() {
+import butterknife.ButterKnife;
 
-    }
+public class WeatherSingleDay extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.weather_single_day, container, false);
+        View view = inflater.inflate(R.layout.fragment_weather_single_day, container, false);
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     @Override
