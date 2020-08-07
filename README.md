@@ -1,4 +1,4 @@
 # Weather App V2
-Weather app but redone right.
+Weather app with updated UI.
 
 ### Work in Progress
