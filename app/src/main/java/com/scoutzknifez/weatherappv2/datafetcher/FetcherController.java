@@ -19,13 +19,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class FetcherController {
-    // Temecula, CA
-    public static String lat = "33.513833";
-    public static String lon = "-117.103338";
-
-    // Pahrump, NV
-    // private static String lat = "36.3087267";
-    // private static String lon = "-116.0230096";
+    // Temecula, CA  : Pahrump, NV
+    public static boolean isTemeculaIfNotPahrump = true;
+    public static String lat = isTemeculaIfNotPahrump ? "33.513833"   : "36.3087267";
+    public static String lon = isTemeculaIfNotPahrump ? "-117.103338" : "-116.0230096";
 
     private static String url = HiddenConstants.WEB_SERVER + HiddenConstants.API_KEY + "/" + lat + "," + lon + HiddenConstants.ADDITIONAL_ARGS;
 
