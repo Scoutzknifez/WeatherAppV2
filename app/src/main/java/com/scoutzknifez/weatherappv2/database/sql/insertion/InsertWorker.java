@@ -20,11 +20,12 @@ public class InsertWorker extends Worker {
 
     @Override
     public void run() {
+        statement = getSQLStatement();
         if (getStatement() == null)
             return;
 
         doInsertion();
-        closeStatement();
+        finish();
     }
 
     private void doInsertion() {

@@ -8,7 +8,7 @@ import lombok.Getter;
 
 /**
  * The enumerators in this class file MUST be named the same as
- * the table names inside of the database.
+ * the table names inside of the database.  They are CASE SENSITIVE.
  *
  * The {@link Class} parameter for each parameter must implement {@link Databasable}
  * and must have a static method called "createInstance" with a ResultSet as a parameter.

@@ -22,11 +22,12 @@ public class UpdateWorker extends Worker {
 
     @Override
     public void run() {
+        statement = getSQLStatement();
         if (getStatement() == null)
             return;
 
         doUpdate();
-        closeStatement();
+        finish();
     }
 
     private void doUpdate() {

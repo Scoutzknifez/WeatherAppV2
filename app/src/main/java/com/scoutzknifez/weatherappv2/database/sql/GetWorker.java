@@ -31,7 +31,8 @@ public class GetWorker extends Worker {
 
     @Override
     public void run() {
-        if (getStatement() == null)
+        statement = getSQLStatement();
+        if (statement == null)
             return;
 
         getFromDatabase();
@@ -39,7 +40,7 @@ public class GetWorker extends Worker {
             Utils.log("Item list is null from GetWorker");
         }
 
-        closeStatement();
+        finish();
     }
 
     /**

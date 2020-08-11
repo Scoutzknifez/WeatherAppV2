@@ -3,7 +3,6 @@ package com.scoutzknifez.weatherappv2.database.sql;
 import com.scoutzknifez.weatherappv2.database.sql.conditions.Conditional;
 import com.scoutzknifez.weatherappv2.database.sql.insertion.Databasable;
 import com.scoutzknifez.weatherappv2.database.sql.insertion.InsertWorker;
-import com.scoutzknifez.weatherappv2.utility.HiddenConstants;
 import com.scoutzknifez.weatherappv2.utility.Utils;
 
 import lombok.NonNull;
@@ -11,17 +10,6 @@ import lombok.NonNull;
 import java.util.List;
 
 public class SQLHelper {
-    public static void closeSafely() {
-        try {
-            GetWorker.connection.close();
-        } catch (Exception e) {
-            // Unref and let GC handle it
-            // TODO This may be incorrect handling when this occurs
-            GetWorker.connection = null;
-            Utils.log("Could not close the connection to the database at " + HiddenConstants.DATABASE_URL);
-        }
-    }
-
     /**
      * Updates a database entry in table specified with the new data
      * presented by fieldName (the database column) and the

@@ -13,8 +13,8 @@ import java.sql.Statement;
 
 @Getter
 public abstract class Worker implements Runnable {
-    public static Connection connection;
-    private Statement statement;
+    protected Connection connection;
+    protected Statement statement;
     @Setter private Table table;
 
     public Worker(Table table) {
@@ -26,22 +26,28 @@ public abstract class Worker implements Runnable {
      * Gets the MySQL connector ready to work.
      */
     private void ready() {
-        if (connection == null) {
-            if (connectToDriver() == Result.FAILURE) {
-                Utils.log("Could not connect driver for MySQL.");
-                return; // TODO should instead throw exceptions rather than returning
-            }
-
-            connection = connectToMySQLDatabase();
-            if (connection == null) {
-                Utils.log("Could not connect to MySQL Database.");
-                return;
-            }
+        if (connectToDriver() == Result.FAILURE) {
+            Utils.log("Could not connect driver for MySQL.");
+            return; // TODO should instead throw exceptions rather than returning
         }
 
-        statement = getSQLStatement();
-        if (statement == null)
+        connection = connectToMySQLDatabase();
+        if (connection == null) {
+            Utils.log("Could not connect to MySQL Database.");
+            return;
+        }
+
+        if (getSQLStatementFromConnection(connection) == null) {
             Utils.log("Could not get MySQL statement.");
+            return;
+        }
+
+        Utils.log("The MySQL connection to database is ready!");
+    }
+
+    protected void finish() {
+        closeStatement(getStatement());
+        closeConnection(getConnection());
     }
 
     /**
@@ -52,7 +58,6 @@ public abstract class Worker implements Runnable {
         Utils.log("Connecting driver!");
         try {
             Class.forName(HiddenConstants.JDBC_DRIVER);
-
             return Result.SUCCESS;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -77,7 +82,7 @@ public abstract class Worker implements Runnable {
      * Creates a new instance of a statement for the connected database.
      * @return  A statement for the connected database.
      */
-    private Statement getSQLStatement() {
+    private Statement getSQLStatementFromConnection(Connection connection) {
         try {
             return connection.createStatement();
         } catch (Exception e) {
@@ -86,10 +91,19 @@ public abstract class Worker implements Runnable {
         }
     }
 
+    protected Statement getSQLStatement() {
+        try {
+            return getSQLStatementFromConnection(connectToMySQLDatabase());
+        } catch (Exception e) {
+            Utils.log("Couldn't grab the connection and form a statement.");
+            return null;
+        }
+    }
+
     /**
      * Closes the currently open statement.
      */
-    protected void closeStatement() {
+    protected void closeStatement(Statement statement) {
         try {
             statement.close();
         } catch (Exception e) {
@@ -100,7 +114,7 @@ public abstract class Worker implements Runnable {
     /**
      * Closes the connection to the database safely, ending all open statements.
      */
-    protected void closeConnection() {
+    protected void closeConnection(Connection connection) {
         try {
             connection.close();
         } catch (Exception e) {
