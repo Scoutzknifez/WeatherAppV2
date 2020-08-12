@@ -94,12 +94,24 @@ public class LocationActivity extends AppCompatActivity {
 
     private void initializeLocationServices() {
         try {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, Constants.MILLIS_IN_MINUTE, 0, listener);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.MILLIS_IN_MINUTE, 0, listener);
-            DataConnector.lastKnownLocation = getLastKnownLocation();
-        } catch (SecurityException e) {
+            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, Constants.MILLIS_IN_MINUTE, 0, listener);
+        } catch (SecurityException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        try {
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.MILLIS_IN_MINUTE, 0, listener);
+        } catch (SecurityException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        DataConnector.lastKnownLocation = getLastKnownLocation();
     }
 
     public boolean hasLocationPermissions() {
