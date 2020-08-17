@@ -12,6 +12,7 @@ import com.scoutzknifez.weatherappv2.location.LocationActivity;
 import com.scoutzknifez.weatherappv2.structures.Refresher;
 import com.scoutzknifez.weatherappv2.utility.Constants;
 import com.scoutzknifez.weatherappv2.utility.Globals;
+import com.scoutzknifez.weatherappv2.utility.Utils;
 
 public class MainActivity extends LocationActivity {
 
@@ -23,9 +24,13 @@ public class MainActivity extends LocationActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Globals.refresher = new Refresher();
-        while (Globals.recentWeatherData.peek() == null) {}
+        // Wait for location to be set TODO load screen here?
+        while (DataConnector.lastKnownLocation == null) {}
 
+        Globals.refresher = new Refresher();
+
+        // Wait for data to be retrieved
+        while (Globals.recentWeatherData.peek() == null) {}
 
         if (hasLocationPermissions()) {
             initializeMainWeatherDisplay();

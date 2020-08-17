@@ -13,8 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.mysql.jdbc.Util;
 import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
 import com.scoutzknifez.weatherappv2.utility.Constants;
+import com.scoutzknifez.weatherappv2.utility.Utils;
 
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class LocationActivity extends AppCompatActivity {
         @Override
         public void onLocationChanged(Location location) {
             DataConnector.lastKnownLocation = location;
+            Utils.log("Location: %s | %s", location.getLatitude(), location.getLongitude());
         }
 
         @Override
@@ -94,8 +97,9 @@ public class LocationActivity extends AppCompatActivity {
 
     private void initializeLocationServices() {
         try {
-            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, Constants.MILLIS_IN_MINUTE, 0, listener);
+            }
         } catch (SecurityException se) {
             se.printStackTrace();
         } catch (Exception e) {
@@ -103,8 +107,9 @@ public class LocationActivity extends AppCompatActivity {
         }
 
         try {
-            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.MILLIS_IN_MINUTE, 0, listener);
+            }
         } catch (SecurityException se) {
             se.printStackTrace();
         } catch (Exception e) {
