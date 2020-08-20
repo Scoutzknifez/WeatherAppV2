@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.mysql.jdbc.Util;
 import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
 import com.scoutzknifez.weatherappv2.utility.Constants;
 import com.scoutzknifez.weatherappv2.utility.Utils;
@@ -31,7 +30,9 @@ import lombok.Getter;
 public class LocationActivity extends AppCompatActivity {
     private static final int REQUEST_COARSE_LOCATION_CODE = 7373;
     private static final int REQUEST_FINE_LOCATION_CODE = 7474;
-    public boolean isRequesting = false;
+    public boolean isRequestingPermissions = false;
+    public boolean isRequestingNetworkLocation = false;
+    public boolean isRequestingGPSLocation = false;
 
     private LocationManager locationManager = null;
 
@@ -72,7 +73,7 @@ public class LocationActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        isRequesting = false;
+        isRequestingPermissions = false;
 
         if (hasLocationPermissions())
             initializeLocationServices();
@@ -95,9 +96,9 @@ public class LocationActivity extends AppCompatActivity {
         return bestLocation;
     }
 
-    private void initializeLocationServices() {
+    public void initializeLocationServices() {
         try {
-            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            if (!isRequestingNetworkLocation() && locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, Constants.MILLIS_IN_MINUTE, 0, listener);
             }
         } catch (SecurityException se) {
@@ -107,7 +108,7 @@ public class LocationActivity extends AppCompatActivity {
         }
 
         try {
-            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            if (!isRequestingGPSLocation() && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.MILLIS_IN_MINUTE, 0, listener);
             }
         } catch (SecurityException se) {
@@ -119,6 +120,10 @@ public class LocationActivity extends AppCompatActivity {
         DataConnector.lastKnownLocation = getLastKnownLocation();
     }
 
+    public boolean hasAnyLocationProviderEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
     public boolean hasLocationPermissions() {
         return hasPermissions(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
     }
@@ -126,9 +131,9 @@ public class LocationActivity extends AppCompatActivity {
     private boolean hasPermissions(String... permissions) {
         for (String permission : permissions) {
             if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-                if (!isRequesting) {
+                if (!isRequestingPermissions) {
                     ActivityCompat.requestPermissions(this, new String[] {permission}, (permission.equals(Manifest.permission.ACCESS_COARSE_LOCATION) ? REQUEST_COARSE_LOCATION_CODE : REQUEST_FINE_LOCATION_CODE));
-                    isRequesting = true;
+                    isRequestingPermissions = true;
                 }
                 return false;
             }

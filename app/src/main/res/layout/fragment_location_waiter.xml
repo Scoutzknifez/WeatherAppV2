@@ -6,6 +6,7 @@
     android:background="@color/black">
 
     <TextView
+        android:id="@+id/text_waiter_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

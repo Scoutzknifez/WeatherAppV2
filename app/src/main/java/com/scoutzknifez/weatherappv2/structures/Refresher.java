@@ -20,6 +20,7 @@ import lombok.Setter;
 @Getter
 public class Refresher {
     private Supplier<WeatherDataPacket> weatherRefresher = FetcherController::fetchWeather;
+    private boolean continueRefresh = true;
 
     public Refresher() {
         Thread thread = new Thread(this::queueRefresh);
@@ -31,18 +32,21 @@ public class Refresher {
         try {
             if (Utils.hasInternetConnection()) {
                 WeatherDataPacket packet = weatherRefresher.get();
-                if (packet != null) {
-                    Globals.recentWeatherData.push(packet);
-                    WeatherForTime weatherForTime =
-                            new WeatherForTime(packet.getCurrentWeather().getTime(),
-                                    new Location(FetcherController.lat, FetcherController.lon),
-                                    packet.getCurrentWeather().getTemperature(),
-                                    packet.getCurrentWeather().getPrecipitationProbability(),
-                                    packet.getCurrentWeather().getHumidity(),
-                                    packet.getCurrentWeather().getWindSpeed(),
-                                    packet.getCurrentWeather().getWindBearing());
-                    SQLHelper.insertIntoTable(Table.WEATHER_FOR_TIME, weatherForTime);
+                if (packet == null) {
+                    Utils.log("Packet received from Weather API was empty!");
+                    return;
                 }
+
+                Globals.recentWeatherData.push(packet);
+                WeatherForTime weatherForTime =
+                        new WeatherForTime(packet.getCurrentWeather().getTime(),
+                                new Location(FetcherController.lat, FetcherController.lon),
+                                packet.getCurrentWeather().getTemperature(),
+                                packet.getCurrentWeather().getPrecipitationProbability(),
+                                packet.getCurrentWeather().getHumidity(),
+                                packet.getCurrentWeather().getWindSpeed(),
+                                packet.getCurrentWeather().getWindBearing());
+                SQLHelper.insertIntoTable(Table.WEATHER_FOR_TIME, weatherForTime);
 
                 try {
                     for (Updatable updatable : DataConnector.updatables)
