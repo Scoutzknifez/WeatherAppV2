@@ -10,7 +10,8 @@ import retrofit2.http.POST;
 public interface WeatherAPI {
     // TODO Built API for this
 
-    @POST
+    @POST("/api/subtest")
     @Headers("Accept: application/json")
-    Call postWeatherUpdate(@Body WeatherDataPacket packet);
+    Call<String> postWeatherUpdate(@Body WeatherDataPacket packet);
+    // https://stackoverflow.com/questions/21398598/how-to-post-raw-whole-json-in-the-body-of-a-retrofit-request
 }

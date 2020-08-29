@@ -2,6 +2,7 @@ package com.scoutzknifez.weatherappv2.structures;
 
 import androidx.core.util.Supplier;
 
+import com.scoutzknifez.weatherappv2.database.WeatherAPI;
 import com.scoutzknifez.weatherappv2.database.sql.SQLHelper;
 import com.scoutzknifez.weatherappv2.database.sql.Table;
 import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
@@ -15,6 +16,11 @@ import com.scoutzknifez.weatherappv2.utility.Utils;
 
 import lombok.Getter;
 import lombok.Setter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 @Setter
 @Getter
@@ -47,6 +53,19 @@ public class Refresher {
                                 packet.getCurrentWeather().getWindSpeed(),
                                 packet.getCurrentWeather().getWindBearing());
                 SQLHelper.insertIntoTable(Table.WEATHER_FOR_TIME, weatherForTime);
+
+                WeatherAPI api = new Retrofit.Builder().baseUrl(Constants.API_IP_ADDRESS).addConverterFactory(GsonConverterFactory.create()).build().create(WeatherAPI.class);
+                api.postWeatherUpdate(packet).enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Utils.log("Here I am! " + response.raw());
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
 
                 try {
                     for (Updatable updatable : DataConnector.updatables)
