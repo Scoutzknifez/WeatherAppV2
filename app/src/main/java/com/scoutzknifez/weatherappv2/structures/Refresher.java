@@ -9,6 +9,7 @@ import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
 import com.scoutzknifez.weatherappv2.datafetcher.FetcherController;
 import com.scoutzknifez.weatherappv2.fragments.interfaces.Updatable;
 import com.scoutzknifez.weatherappv2.structures.dto.WeatherForTime;
+import com.scoutzknifez.weatherappv2.structures.dto.APIResult;
 import com.scoutzknifez.weatherappv2.structures.weather.WeatherDataPacket;
 import com.scoutzknifez.weatherappv2.utility.Constants;
 import com.scoutzknifez.weatherappv2.utility.Globals;
@@ -45,7 +46,8 @@ public class Refresher {
 
                 Globals.recentWeatherData.push(packet);
                 WeatherForTime weatherForTime =
-                        new WeatherForTime(packet.getCurrentWeather().getTime(),
+                        new WeatherForTime(
+                                packet.getCurrentWeather().getTime(),
                                 new Location(FetcherController.lat, FetcherController.lon),
                                 packet.getCurrentWeather().getTemperature(),
                                 packet.getCurrentWeather().getPrecipitationProbability(),
@@ -54,15 +56,20 @@ public class Refresher {
                                 packet.getCurrentWeather().getWindBearing());
                 SQLHelper.insertIntoTable(Table.WEATHER_FOR_TIME, weatherForTime);
 
-                WeatherAPI api = new Retrofit.Builder().baseUrl(Constants.API_IP_ADDRESS).addConverterFactory(GsonConverterFactory.create()).build().create(WeatherAPI.class);
-                api.postWeatherUpdate(packet).enqueue(new Callback<String>() {
+                WeatherAPI api = new Retrofit.Builder()
+                                        .baseUrl(Constants.API_IP_ADDRESS)
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .build().create(WeatherAPI.class);
+
+                api.postWeatherUpdate(packet.getCurrentWeather()).enqueue(new Callback<APIResult>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Utils.log("Here I am! " + response.raw());
+                    public void onResponse(Call<APIResult> call, Response<APIResult> response) {
+                        Utils.log("The api call to the server was a " + response.body().getResult());
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<APIResult> call, Throwable t) {
+                        Utils.log("Failure to communicate properly with the API!");
                         t.printStackTrace();
                     }
                 });
