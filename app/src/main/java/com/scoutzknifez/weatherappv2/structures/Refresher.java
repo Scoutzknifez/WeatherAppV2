@@ -54,14 +54,14 @@ public class Refresher {
                                 packet.getCurrentWeather().getHumidity(),
                                 packet.getCurrentWeather().getWindSpeed(),
                                 packet.getCurrentWeather().getWindBearing());
-                SQLHelper.insertIntoTable(Table.WEATHER_FOR_TIME, weatherForTime);
+                //SQLHelper.insertIntoTable(Table.WEATHER_FOR_TIME, weatherForTime);
 
                 WeatherAPI api = new Retrofit.Builder()
                                         .baseUrl(Constants.API_IP_ADDRESS)
                                         .addConverterFactory(GsonConverterFactory.create())
                                         .build().create(WeatherAPI.class);
 
-                api.postWeatherUpdate(packet.getCurrentWeather()).enqueue(new Callback<APIResult>() {
+                api.postWeatherUpdate(weatherForTime).enqueue(new Callback<APIResult>() {
                     @Override
                     public void onResponse(Call<APIResult> call, Response<APIResult> response) {
                         Utils.log("The api call to the server was a " + response.body().getResult());

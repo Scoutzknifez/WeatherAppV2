@@ -40,7 +40,7 @@ public class LocationActivity extends AppCompatActivity {
         @Override
         public void onLocationChanged(Location location) {
             DataConnector.lastKnownLocation = location;
-            Utils.log("Location: %s | %s", location.getLatitude(), location.getLongitude());
+            Utils.log("Location updated (Lat: %s, Long: %s)", location.getLatitude(), location.getLongitude());
         }
 
         @Override
