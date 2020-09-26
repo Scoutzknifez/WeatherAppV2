@@ -3,8 +3,6 @@ package com.scoutzknifez.weatherappv2.structures;
 import androidx.core.util.Supplier;
 
 import com.scoutzknifez.weatherappv2.database.WeatherAPI;
-import com.scoutzknifez.weatherappv2.database.sql.SQLHelper;
-import com.scoutzknifez.weatherappv2.database.sql.Table;
 import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
 import com.scoutzknifez.weatherappv2.datafetcher.FetcherController;
 import com.scoutzknifez.weatherappv2.fragments.interfaces.Updatable;

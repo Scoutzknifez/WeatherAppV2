@@ -1,15 +1,9 @@
 package com.scoutzknifez.weatherappv2.utility;
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 public class Constants {
     // Program wide variables
     public static final String TAG = "WEATHER_APP_V2";
-    public static final String API_IP_ADDRESS = "http://10.0.2.2:3001"; // THE IP ADDRESS TO HOST MACHINE
-    public static final Retrofit.Builder RETROFIT = new Retrofit.Builder()
-                                                        .baseUrl(API_IP_ADDRESS)
-                                                        .addConverterFactory(GsonConverterFactory.create());
+    public static final String API_IP_ADDRESS = "http://mikeinca.ddns.net:3210"; // THE IP ADDRESS TO HOST MACHINE
 
     // Time
     public static final int MILLIS_IN_SECOND = 1000;
