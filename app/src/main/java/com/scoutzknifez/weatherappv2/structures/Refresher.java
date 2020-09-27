@@ -52,7 +52,6 @@ public class Refresher {
                                 packet.getCurrentWeather().getHumidity(),
                                 packet.getCurrentWeather().getWindSpeed(),
                                 packet.getCurrentWeather().getWindBearing());
-                //SQLHelper.insertIntoTable(Table.WEATHER_FOR_TIME, weatherForTime);
 
                 WeatherAPI api = new Retrofit.Builder()
                                         .baseUrl(Constants.API_IP_ADDRESS)

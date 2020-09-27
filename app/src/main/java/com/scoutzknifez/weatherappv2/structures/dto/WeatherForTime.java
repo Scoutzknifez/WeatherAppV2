@@ -1,6 +1,5 @@
 package com.scoutzknifez.weatherappv2.structures.dto;
 
-import com.scoutzknifez.weatherappv2.database.sql.insertion.Databasable;
 import com.scoutzknifez.weatherappv2.structures.Location;
 import com.scoutzknifez.weatherappv2.utility.exceptions.ParseFailureException;
 
@@ -11,7 +10,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class WeatherForTime implements Databasable {
+public class WeatherForTime {
     // PK (Time, Lat, Long)
     private long time;
     private Location location;
@@ -22,15 +21,6 @@ public class WeatherForTime implements Databasable {
     private double humidity;
     private int windSpeed;
     private double windBearing;
-
-
-    @Override
-    public Object[] fieldsToArray() {
-        return new Object[]{getTime(),
-                getLocation().getLatitude(), getLocation().getLongitude(),
-                getTemperature(), getPrecipitationProbability(),
-                getHumidity(), getWindSpeed(), getWindBearing()};
-    }
 
     public static WeatherForTime createInstance(ResultSet set) {
         try {
