@@ -40,7 +40,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginBottom="40dp"
             app:layout_constraintStart_toEndOf="@id/current_weather_icon"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_refreshed"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
@@ -49,12 +49,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="60dp"
             app:layout_constraintStart_toEndOf="@id/left_guideline"
             app:layout_constraintEnd_toStartOf="@id/right_guideline"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toTopOf="@id/left_guideline"
+            app:layout_constraintBottom_toBottomOf="@id/left_guideline">
 
             <TextView
                 android:id="@+id/current_temp"
@@ -63,7 +61,7 @@
                 android:text="Current Temperature: "
                 android:textColor="@color/white"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/apparent_temp"/>
@@ -75,7 +73,7 @@
                 android:text="Apparent Temperature: "
                 android:textColor="@color/white"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/current_temp"
                 app:layout_constraintBottom_toTopOf="@id/current_high_temp"/>
@@ -87,7 +85,7 @@
                 android:text="Expected High: "
                 android:textColor="@color/white"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/apparent_temp"
                 app:layout_constraintBottom_toTopOf="@id/current_low_temp" />
@@ -99,7 +97,7 @@
                 android:text="Expected Low: "
                 android:textColor="@color/white"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/current_high_temp"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -114,7 +112,7 @@
             android:layout_marginBottom="40dp"
             app:layout_constraintStart_toEndOf="@id/left_guideline"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_refreshed"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
@@ -123,12 +121,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="60dp"
             app:layout_constraintStart_toEndOf="@id/right_guideline"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toTopOf="@id/right_guideline"
+            app:layout_constraintBottom_toBottomOf="@id/right_guideline">
 
             <TextView
                 android:id="@+id/current_precipitation_chance"
@@ -137,7 +133,7 @@
                 android:text="Precipitation Chance: "
                 android:textColor="@color/white"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/current_humidity"/>
@@ -149,7 +145,7 @@
                 android:text="Humidity: "
                 android:textColor="@color/white"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/current_precipitation_chance"
                 app:layout_constraintBottom_toTopOf="@id/current_wind"/>
@@ -161,7 +157,7 @@
                 android:text="Wind: "
                 android:textColor="@color/white"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/current_humidity"
                 app:layout_constraintBottom_toTopOf="@id/current_sunset_time"/>
@@ -173,26 +169,12 @@
                 android:text="Sunset Time: "
                 android:textColor="@color/white"
                 android:textAlignment="center"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/current_wind"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <!-- TODO Temp stuff to remove later, for testing -->
-
-        <TextView
-            android:id="@+id/refresh_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Refresh Count Holder"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/date_refreshed"/>
 
         <TextView
             android:id="@+id/date_refreshed"
@@ -201,8 +183,21 @@
             android:text="Date Line Holder"
             android:textColor="@color/white"
             android:textAlignment="center"
+            android:textSize="28sp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/refresh_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/time_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Updated"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/date_refreshed"
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -223,7 +218,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:text="The Weather For The Week Ahead Of You"
+            android:text="The Week Ahead Of You"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
