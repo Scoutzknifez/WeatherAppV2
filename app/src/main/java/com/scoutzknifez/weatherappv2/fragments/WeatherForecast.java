@@ -34,11 +34,10 @@ public class WeatherForecast extends Fragment implements Updatable {
     @BindView(R.id.background_container)
     ConstraintLayout parentContainer;
 
-    // TODO Temp
-    @BindView(R.id.refresh_count)
-    TextView refreshTextCount;
     @BindView(R.id.date_refreshed)
     TextView dateRefreshedText;
+    @BindView(R.id.time_updated)
+    TextView timeUpdatedText;
 
     // Today weather information
     @BindView(R.id.current_weather_icon)
@@ -89,9 +88,15 @@ public class WeatherForecast extends Fragment implements Updatable {
         final TimeAtMoment timeAtMoment = new TimeAtMoment(Utils.getMillisFromEpoch(mostRecent.getTime()));
 
         getActivity().runOnUiThread(() -> {
-            // TODO Temp for testing
-            refreshTextCount.setText("Successful Update Count: " + DataConnector.updateCount);
-            dateRefreshedText.setText(timeAtMoment.toString());
+            String date = timeAtMoment.toString().split(" at ")[0];
+            String time = timeAtMoment.toString().split(" at ")[1];
+            dateRefreshedText.setText("Today (" + date + ")");
+
+            String hour = time.split(":")[0];
+            String minute = time.split(":")[1];
+            String ampm = time.split(" ")[1];
+            String simpleTime = hour + ":" + minute + " " + ampm;
+            timeUpdatedText.setText("Last updated at " + simpleTime);
 
             // Background colors
             parentContainer.setBackgroundColor(AppUtils.getColorFromCurrent(mostRecent, getContext()));
