@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class FetcherController {
-    public static boolean useLocationServices = false;
+    public static boolean useLocationServices = true;
     private static final boolean isTemeculaIfNotPahrump = false;
     //                                                  Temecula, CA  : Pahrump, NV
     public static String lat = isTemeculaIfNotPahrump ? "33.513833"   : "36.3087267";
