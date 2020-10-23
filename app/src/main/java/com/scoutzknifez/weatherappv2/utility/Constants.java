@@ -16,4 +16,5 @@ public class Constants {
     public static final String WEATHER_FORECAST_TAG = "fragment_weather_forecast";
     public static final String WEATHER_SINGLE_DAY_TAG = "fragment_weather_single_day";
     public static final String LOCATION_WAITER_TAG = "fragment_location_waiter";
+    public static final String INTERNET_WAITER_TAG = "fragment_internet_waiter";
 }
