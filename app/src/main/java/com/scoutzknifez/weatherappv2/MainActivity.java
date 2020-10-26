@@ -52,7 +52,6 @@ public class MainActivity extends LocationActivity {
             initializeMainWeatherDisplay();
         }
 
-
         setContentView(R.layout.activity_main);
     }
 

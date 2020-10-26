@@ -103,7 +103,11 @@ public class FetcherController {
                 dayIndex++;
 
             int indexOfHour = hourTime.getHour();
-            weatherDataPacket.getDailyWeather().get(dayIndex).getHourlyWeather()[indexOfHour] = weatherDataPacket.getHourlyWeather().get(hourIndex);
+            try {
+                weatherDataPacket.getDailyWeather().get(dayIndex).getHourlyWeather()[indexOfHour] = weatherDataPacket.getHourlyWeather().get(hourIndex);
+            } catch (Exception e) {
+                return;
+            }
 
             hourIndex++;
         }
