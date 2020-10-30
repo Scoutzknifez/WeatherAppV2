@@ -33,8 +33,8 @@ public class MainActivity extends LocationActivity {
             return;
         }
 
-        if (FetcherController.useLocationServices && !getLocationManager().isProviderEnabled(LocationManager.NETWORK_PROVIDER) && !getLocationManager().isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            // If we dont have the location services turned on for the device, show that and return
+        if (!getLocationManager().isProviderEnabled(LocationManager.NETWORK_PROVIDER) && !getLocationManager().isProviderEnabled(LocationManager.GPS_PROVIDER) && FetcherController.useLocationServices ) {
+            // If we don't have the location services turned on for the device, show that and return
             transitionToFragment(new LocationWaiter(R.string.locations_disabled), Constants.LOCATION_WAITER_TAG);
             setContentView(R.layout.activity_main);
             return;
