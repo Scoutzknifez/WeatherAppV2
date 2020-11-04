@@ -78,9 +78,10 @@ public class LocationActivity extends AppCompatActivity {
             initializeLocationServices();
     }
 
-    private Location getLastKnownLocation() throws SecurityException {
+    public Location getLastKnownLocation() throws SecurityException {
         locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
         List<String> providers = locationManager.getProviders(true);
+
         Location bestLocation = null;
         for (String provider : providers) {
             Location l = locationManager.getLastKnownLocation(provider);
@@ -92,6 +93,7 @@ public class LocationActivity extends AppCompatActivity {
                 bestLocation = l;
             }
         }
+
         return bestLocation;
     }
 

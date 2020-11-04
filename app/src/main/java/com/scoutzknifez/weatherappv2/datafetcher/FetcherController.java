@@ -25,11 +25,16 @@ public class FetcherController {
     public static String lat = isTemeculaIfNotPahrump ? "33.513833"   : "36.3087267";
     public static String lon = isTemeculaIfNotPahrump ? "-117.103338" : "-116.0230096";
 
-    private static String url = HiddenConstants.WEB_SERVER + HiddenConstants.API_KEY + "/" + (useLocationServices ? DataConnector.lastKnownLocation.getLatitude() : lat) + "," + (useLocationServices ? DataConnector.lastKnownLocation.getLongitude() : lon) + HiddenConstants.ADDITIONAL_ARGS;
+    private static String getURL() {
+        return HiddenConstants.WEB_SERVER +
+                HiddenConstants.API_KEY + "/" +
+                (useLocationServices ? DataConnector.lastKnownLocation.getLatitude() : lat) + "," +
+                (useLocationServices ? DataConnector.lastKnownLocation.getLongitude() : lon) + HiddenConstants.ADDITIONAL_ARGS;
+    }
 
     public static WeatherDataPacket fetchWeather() {
         try {
-            URL darkSkyURL = new URL(url);
+            URL darkSkyURL = new URL(getURL());
             URLConnection connection = darkSkyURL.openConnection();
             DataConnector.updateCount++;
             BufferedReader fetched = new BufferedReader(new InputStreamReader(connection.getInputStream()));
