@@ -35,7 +35,7 @@ public class TimeAtMoment {
 
     public void refreshTime() {
         Date date = new Date(getMillis());
-        DateFormat format = new SimpleDateFormat("yyyy:MM:dd:HH:mm:ss:EEE");
+        DateFormat format = new SimpleDateFormat("yyyy:MM:dd:HH:mm:ss:EEEE");
         String formatted = format.format(date);
         String[] splits = formatted.split(":");
         try {

@@ -51,7 +51,7 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
 
         TimeAtMoment time = new TimeAtMoment(weatherCard.getEpox() * 1000);
         String date = time.getMonthDayFormat();
-        String day = time.getDayText();
+        String day = time.getDayText().substring(0, 3);
         String high = "H: " + weatherCard.getHighTemp() + "°F";
         String low = "L: " + weatherCard.getLowTemp() + "°F";
         String precip = "Precipitation: " + weatherCard.getPrecipitationChance() + "%";
