@@ -11,23 +11,36 @@
     android:paddingBottom="4dp">
 
     <TextView
-        android:id="@+id/dateLine"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/day"
         android:text="@string/little_dummy"
         android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/date"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/little_dummy"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        />
 
     <ImageView
         android:id="@+id/iconImage"
         android:contentDescription="@string/dummy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/dateLine"
+        app:layout_constraintTop_toBottomOf="@id/date"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:maxHeight="100dp"
