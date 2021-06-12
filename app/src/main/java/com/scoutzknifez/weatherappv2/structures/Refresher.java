@@ -51,7 +51,8 @@ public class Refresher {
                                 packet.getCurrentWeather().getPrecipitationProbability(),
                                 packet.getCurrentWeather().getHumidity(),
                                 packet.getCurrentWeather().getWindSpeed(),
-                                packet.getCurrentWeather().getWindBearing());
+                                packet.getCurrentWeather().getWindBearing()
+                        );
 
                 WeatherAPI api = new Retrofit.Builder()
                                         .baseUrl(Constants.API_IP_ADDRESS)
