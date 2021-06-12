@@ -1,6 +1,5 @@
 package com.scoutzknifez.weatherappv2;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.location.LocationManager;
@@ -15,6 +14,7 @@ import com.scoutzknifez.weatherappv2.location.LocationActivity;
 import com.scoutzknifez.weatherappv2.structures.Refresher;
 import com.scoutzknifez.weatherappv2.utility.Constants;
 import com.scoutzknifez.weatherappv2.utility.Globals;
+import com.scoutzknifez.weatherappv2.utility.Utils;
 
 public class MainActivity extends LocationActivity {
     int resumeCount = 0;
@@ -27,8 +27,14 @@ public class MainActivity extends LocationActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        if (!Utils.hasInternetConnection()) {
+            transitionToFragment(new LocationWaiter(R.string.internet_disabled), Constants.INTERNET_WAITER_TAG);
+            setContentView(R.layout.activity_main);
+            return;
+        }
+
         if (FetcherController.useLocationServices && !getLocationManager().isProviderEnabled(LocationManager.NETWORK_PROVIDER) && !getLocationManager().isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            // If we dont have the location services turned on for the device, show that and return
+            // If we don't have the location services turned on for the device, show that and return
             transitionToFragment(new LocationWaiter(R.string.locations_disabled), Constants.LOCATION_WAITER_TAG);
             setContentView(R.layout.activity_main);
             return;
@@ -45,7 +51,6 @@ public class MainActivity extends LocationActivity {
         } else {
             initializeMainWeatherDisplay();
         }
-
 
         setContentView(R.layout.activity_main);
     }
@@ -82,7 +87,7 @@ public class MainActivity extends LocationActivity {
         if (resumeCount++ <= 0)
             return;
 
-        if (!FetcherController.useLocationServices)
+        if (!Utils.hasInternetConnection() || !FetcherController.useLocationServices)
             return;
 
         if (getSupportFragmentManager().findFragmentByTag(Constants.LOCATION_WAITER_TAG) != null && getSupportFragmentManager().findFragmentByTag(Constants.LOCATION_WAITER_TAG).isVisible()) {

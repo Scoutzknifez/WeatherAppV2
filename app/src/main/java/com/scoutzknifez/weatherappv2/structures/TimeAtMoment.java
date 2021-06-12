@@ -18,6 +18,7 @@ public class TimeAtMoment {
     private int year;
     private int month;
     private int day;
+    private String dayText;
     private int hour;
     private int minute;
     private int second;
@@ -34,7 +35,7 @@ public class TimeAtMoment {
 
     public void refreshTime() {
         Date date = new Date(getMillis());
-        DateFormat format = new SimpleDateFormat("yyyy:MM:dd:HH:mm:ss");
+        DateFormat format = new SimpleDateFormat("yyyy:MM:dd:HH:mm:ss:EEEE");
         String formatted = format.format(date);
         String[] splits = formatted.split(":");
         try {
@@ -44,6 +45,7 @@ public class TimeAtMoment {
             hour = Integer.parseInt(splits[3]);
             minute = Integer.parseInt(splits[4]);
             second = Integer.parseInt(splits[5]);
+            dayText = splits[6];
         } catch (Exception e) {
             Utils.log("Can not properly create TimeAtMoment object.");
         }
@@ -53,6 +55,15 @@ public class TimeAtMoment {
         return getYear() == time.getYear() &&
                 getMonth() == time.getMonth() &&
                 getDay() == time.getDay();
+    }
+
+    public String getMonthDayFormat() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getMonth());
+        sb.append("/");
+        sb.append(getDay());
+
+        return sb.toString();
     }
 
     public String getDateFormat() {

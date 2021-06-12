@@ -49,7 +49,9 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
 
         // holder.container.getBackground().setColorFilter(AppUtils.getColorFromConditionHigh(weatherDayList.get(position), getContext()), PorterDuff.Mode.SRC_ATOP);
 
-        String date = new TimeAtMoment(weatherCard.getEpox() * 1000).getDateFormat();
+        TimeAtMoment time = new TimeAtMoment(weatherCard.getEpox() * 1000);
+        String date = time.getMonthDayFormat();
+        String day = time.getDayText().substring(0, 3);
         String high = "H: " + weatherCard.getHighTemp() + "°F";
         String low = "L: " + weatherCard.getLowTemp() + "°F";
         String precip = "Precipitation: " + weatherCard.getPrecipitationChance() + "%";
@@ -62,6 +64,7 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
         );
 
         holder.date.setText(date);
+        holder.day.setText(day);
         holder.icon.setImageResource(AppUtils.getWeatherIcon(weatherCard.getIcon(), getContext()));
         holder.highTemp.setText(high);
         holder.lowTemp.setText(low);
@@ -87,6 +90,7 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
 
     static class CardViewHolder extends RecyclerView.ViewHolder{
         ConstraintLayout container;
+        TextView day;
         TextView date;
         ImageView icon;
         TextView highTemp;
@@ -99,7 +103,8 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.
             super(view);
 
             this.container = view.findViewById(R.id.cardParent);
-            this.date = view.findViewById(R.id.dateLine);
+            this.date = view.findViewById(R.id.date);
+            this.day = view.findViewById(R.id.day);
             this.icon = view.findViewById(R.id.iconImage);
             this.highTemp = view.findViewById(R.id.highTempLine);
             this.lowTemp = view.findViewById(R.id.lowTempLine);

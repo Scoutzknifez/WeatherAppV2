@@ -13,9 +13,6 @@ import androidx.fragment.app.Fragment;
 import com.scoutzknifez.weatherappv2.R;
 import com.scoutzknifez.weatherappv2.datafetcher.DataConnector;
 import com.scoutzknifez.weatherappv2.utility.AppUtils;
-import com.scoutzknifez.weatherappv2.utility.Constants;
-import com.scoutzknifez.weatherappv2.utility.Globals;
-import com.scoutzknifez.weatherappv2.utility.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

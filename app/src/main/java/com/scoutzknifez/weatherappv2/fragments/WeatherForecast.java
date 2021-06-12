@@ -90,7 +90,7 @@ public class WeatherForecast extends Fragment implements Updatable {
         getActivity().runOnUiThread(() -> {
             String date = timeAtMoment.toString().split(" at ")[0];
             String time = timeAtMoment.toString().split(" at ")[1];
-            dateRefreshedText.setText("Today (" + date + ")");
+            dateRefreshedText.setText("Today   (" + date + " " + timeAtMoment.getDayText() + ")");
 
             String hour = time.split(":")[0];
             String minute = time.split(":")[1];

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WeatherAppV2</string>
     <string name="locations_disabled">Your location services appear to be disabled, you must enable them before continuing.</string>
+    <string name="internet_disabled">You do not seem to have an internet connection, please check your connection and restart the app.</string>
     <string name="little_dummy">Lorem ipsum dolor sit amet.</string>
     <string name="dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel gravida nibh, id ullamcorper orci. Cras condimentum odio non ex vestibulum gravida tincidunt in ipsum. Praesent ornare metus sed mauris lacinia efficitur. Etiam hendrerit mi a elit dapibus ullamcorper. Mauris mi dolor, blandit a nibh id, blandit tincidunt magna. Aliquam eleifend eget velit eu dictum. Cras ac nisi commodo, fermentum lectus sed, venenatis ipsum. Fusce quis libero lectus. Duis non nunc eget lorem fringilla rhoncus interdum sit amet risus.</string>
 </resources>

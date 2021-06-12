@@ -6,6 +6,7 @@ import com.scoutzknifez.weatherappv2.structures.TimeAtMoment;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.concurrent.CountDownLatch;
 
 public class Utils {
     public static String getRealIconName(String s) {
@@ -96,7 +97,7 @@ public class Utils {
     }
 
     public static void log(Object object) {
-        log(object.toString(), null);
+        log(object.toString(), (Object) null);
     }
 
     public static int getRoundedInt(double input) {
@@ -112,15 +113,30 @@ public class Utils {
     }
 
     public static boolean hasInternetConnection() {
-        boolean status = false;
-        try (Socket socket = new Socket()) {
-            InetSocketAddress address = new InetSocketAddress("www.google.com", 80);
-            socket.connect(address, 1500);
-            if (socket.isConnected())
-                status = true;
+        final CountDownLatch latch = new CountDownLatch(1);
+        final boolean[] hasInternet = {false};
+
+        new Thread() {
+            @Override
+            public void run() {
+                try (Socket socket = new Socket()) {
+                    InetSocketAddress address = new InetSocketAddress("www.google.com", 80);
+                    socket.connect(address, 5000);
+                    if (socket.isConnected())
+                        hasInternet[0] = true;
+                } catch (Exception e) {
+                    Utils.log("No internet connection!");
+                }
+                latch.countDown();
+            }
+        }.start();
+
+        try {
+            latch.await();
         } catch (Exception e) {
-            Utils.log("No internet connection available!");
+            e.printStackTrace();
         }
-        return status;
+
+        return hasInternet[0];
     }
 }
