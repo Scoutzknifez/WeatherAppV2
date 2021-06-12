@@ -39,6 +39,7 @@ public class Refresher {
                 WeatherDataPacket packet = weatherRefresher.get();
                 if (packet == null) {
                     Utils.log("Packet received from Weather API was empty!");
+                    requeue();
                     return;
                 }
 
@@ -84,6 +85,10 @@ public class Refresher {
             Utils.log("Could not wait for queue to refresh on %s", e);
         }
 
+        requeue();
+    }
+
+    private void requeue() {
         try {
             Thread.sleep(Constants.MILLIS_IN_MINUTE * 15);
         } catch(Exception e) {
