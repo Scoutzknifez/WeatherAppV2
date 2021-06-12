@@ -77,12 +77,17 @@ public class Refresher {
                 } catch (Exception e) {
                     Utils.log("Could not update the screen because %s", e);
                 }
-
-                Thread.sleep(Constants.MILLIS_IN_MINUTE * 15);
             }
         } catch (Exception e) {
             e.printStackTrace();
             Utils.log("Could not wait for queue to refresh on %s", e);
+        }
+
+        try {
+            Thread.sleep(Constants.MILLIS_IN_MINUTE * 15);
+        } catch(Exception e) {
+            e.printStackTrace();
+            Utils.log("Could not sleep the main thread for the refresher.");
         }
 
         queueRefresh();
